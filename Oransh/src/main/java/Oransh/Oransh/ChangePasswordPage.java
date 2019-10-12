@@ -2,7 +2,10 @@ package Oransh.Oransh;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -14,51 +17,41 @@ public class ChangePasswordPage extends Page {
 		super();
 	}
 
+	@FindBy(name = "oldpassword")
+	WebElement oldpassword;
 
+	@FindBy(name = "newpassword")
+	WebElement newpassword;
 
-	public static void changePasswordButton() {
-		driver.findElement(By.xpath("/html/body/div[3]/div/ul/li[11]/a")).click();
-	}
-	public static void changePassword(String oldpassword, String newpassword, String confirmpassword) {//Test with wrong PassWord
-		driver.findElement(By.name("oldpassword")).sendKeys(oldpassword);
-		driver.findElement(By.name("newpassword")).sendKeys(newpassword);
-		driver.findElement(By.name("confirmpassword")).sendKeys(confirmpassword);
-		driver.findElement(By.name("sub")).click();
-    	String alertMessage= driver.switchTo().alert().getText();
+	@FindBy(name = "confirmpassword")
+	WebElement confirmpassword;
+
+	@FindBy(name = "sub")
+	WebElement sub;
+
+	public void changePassword(String oldpassword, String newpassword, String confirmpassword) {// Test with wrong
+																								// PassWord
+		PageFactory.initElements(driver, this);
+		this.oldpassword.sendKeys(oldpassword);
+		this.newpassword.sendKeys(newpassword);
+		this.confirmpassword.sendKeys(confirmpassword);
+		sub.click();
+		String alertMessage = driver.switchTo().alert().getText();
 		System.out.println(alertMessage);
 		Assert.assertEquals(alertMessage, "Old Password is incorrect");
 		driver.switchTo().alert().accept();
 	}
-		public static void changePasswordReal(String oldpassword, String newpassword, String confirmpassword) {		//Test with real Password
-		driver.findElement(By.name("oldpassword")).sendKeys(oldpassword);
-		driver.findElement(By.name("newpassword")).sendKeys(newpassword);
-		driver.findElement(By.name("confirmpassword")).sendKeys(confirmpassword);
-		driver.findElement(By.name("sub")).click();
-    	String alertMessage2= driver.switchTo().alert().getText();
+
+	public void changePasswordReal(String oldpassword, String newpassword, String confirmpassword) { // Test with
+		PageFactory.initElements(driver, this);
+		this.oldpassword.sendKeys(oldpassword);
+		this.newpassword.sendKeys(newpassword);
+		this.confirmpassword.sendKeys(confirmpassword);
+		sub.click();	
+		String alertMessage2 = driver.switchTo().alert().getText();
 		System.out.println(alertMessage2);
 		driver.switchTo().alert().accept();
 		Assert.assertEquals(alertMessage2, "Password is Changed");
-		}
-
-		
-		public static void changePasswordBack(String oldpassword, String newpassword, String confirmpassword) {
-			driver.findElement(By.name("oldpassword")).sendKeys(oldpassword);
-			driver.findElement(By.name("newpassword")).sendKeys(newpassword);
-			driver.findElement(By.name("confirmpassword")).sendKeys(confirmpassword);
-			driver.findElement(By.name("sub")).click();
-			driver.switchTo().alert().accept();
-			System.out.println("Password Changed back");
-
-		
-		
-
 	}
 
-		public static void Login(String id, String password) {
-			driver.findElement(By.name("uid")).sendKeys(id);
-			driver.findElement(By.name("password")).sendKeys(password);
-			driver.findElement(By.name("btnLogin")).click();
-			System.out.println("Log in with new pass");
-			
-		}
 }

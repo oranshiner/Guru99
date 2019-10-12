@@ -50,26 +50,30 @@ public class LoginTests extends Page {
 	@Test // Manager
 	public void ChangePass() throws IOException {
 		// SM1
-		ChangePasswordPage.changePasswordButton();
-		ChangePasswordPage.changePassword("5555", "Mqmehm11!", "Mqmehm11!");
+		Sidebar.changePasswordButton();
+		ChangePasswordPage changePasswordPage = new ChangePasswordPage();
+		changePasswordPage.changePassword("5555", "Mqmehm11!", "Mqmehm11!");
 		// SM2
-		ChangePasswordPage.changePasswordReal("marYgaq!1", "marYgaq!12", "marYgaq!12");
+		changePasswordPage.changePasswordReal("marYgaq!1", "marYgaq!12", "marYgaq!12");
 		// SM3
-		ChangePasswordPage.Login("mngr225054", "marYgaq!12");
-		ChangePasswordPage.changePasswordButton();
+		LoginPage User = new LoginPage();
+		User.login("mngr225054", "marYgaq!12");
+		Sidebar.changePasswordButton();
 		// Change Back to Original Password
-		ChangePasswordPage.changePasswordBack("marYgaq!12", "marYgaq!1", "marYgaq!1");
+		changePasswordPage.changePasswordReal("marYgaq!12", "marYgaq!1", "marYgaq!1");
+		System.out.println("Password Changed back to original");
 		// ReEnter the Site with Original Password
-		ChangePasswordPage.Login("mngr225054", "marYgaq!1");
-		// SM4
+		User.login("mngr225054", "marYgaq!1");
+		
 	}
 
 //	@Test // Manager
 //
 //	public void AddNewCustomer() throws IOException {
 //		//SM4
-//		Page.AddNewCustomerButton();
-//		Page.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024", "1Virendra@gmail.com", "Gujarat", "Qaz!11");
+//		Sidebar.AddNewCustomerButton();
+//		NewCustomer newCustomer = new NewCustomer();
+//		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024", "1Virendra@gmail.com", "Gujarat", "Qaz!11");
 //		
 //		
 //	}

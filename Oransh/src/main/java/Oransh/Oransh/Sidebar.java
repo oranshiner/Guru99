@@ -12,10 +12,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.File;
 import java.io.IOException;
 
-public class Sidebar {
-	protected static WebDriver driver;
-
+public class Sidebar extends Page{
+	public Sidebar() {
+		super();
+	}
 	public static void changePasswordButton() {
 		driver.findElement(By.xpath("/html/body/div[3]/div/ul/li[11]/a")).click();
+	}
+	
+	public static void AddNewCustomerButton() {
+		driver.findElement(By.xpath("/html/body/div[3]/div/ul/li[2]/a")).click();
 	}
 }
