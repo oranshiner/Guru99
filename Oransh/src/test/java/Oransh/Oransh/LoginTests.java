@@ -75,12 +75,22 @@ public class LoginTests extends Page {
 		Sidebar.AddNewCustomerButton();
 		NewCustomer newCustomer = new NewCustomer();
 		//Add New Customer
-		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024", "3Virendra@gmail.com", "Gujarat", "Qaz!11");
+		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024", "32sdVirendra@gmail.com", "Gujarat", "Qaz!11");
 		//SM5
 		Sidebar.AddNewAccountButton();
-		NewAccount newAccount = new NewAccount();
+		Account newAccount = new Account();
 		//***************I NEED TO CHANGE THE CUSTOMER NUMBER TO THE ONE I GOT FROM LAST CUSTOMER
-		newAccount.NewAccountDetails("67902","500");
+		newAccount.NewAccountDetails("27274","500");
+		
+	}
+	
+	//SM6 //SM7 
+	@Test // Manager
+	public void DeleteAccount() {
+		Sidebar.DeleteAccountButton();
+		Account delAccount = new Account();
+		//***************I NEED TO CHANGE THE Account No TO THE ONE I GOT FROM LAST CUSTOMER
+		delAccount.deleteAccount("70196");
 		
 	}
 

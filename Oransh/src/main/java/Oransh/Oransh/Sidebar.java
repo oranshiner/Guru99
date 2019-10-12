@@ -24,4 +24,8 @@ public class Sidebar extends Page{
 		driver.findElement(By.xpath("/html/body/div[3]/div/ul/li[5]/a")).click();
 	}
 	
+	public static void DeleteAccountButton() {
+		driver.findElement(By.xpath("/html/body/div[3]/div/ul/li[7]/a")).click();
+	}
+	
 }
