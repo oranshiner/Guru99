@@ -67,15 +67,21 @@ public class LoginTests extends Page {
 		
 	}
 
-//	@Test // Manager
-//
-//	public void AddNewCustomer() throws IOException {
-//		//SM4
-//		Sidebar.AddNewCustomerButton();
-//		NewCustomer newCustomer = new NewCustomer();
-//		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024", "1Virendra@gmail.com", "Gujarat", "Qaz!11");
-//		
-//		
-//	}
+	@Test // Manager
+	public void AddNewCustomerAndAccount() {
+		
+		//SM4
+		//Open new customer window
+		Sidebar.AddNewCustomerButton();
+		NewCustomer newCustomer = new NewCustomer();
+		//Add New Customer
+		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024", "3Virendra@gmail.com", "Gujarat", "Qaz!11");
+		//SM5
+		Sidebar.AddNewAccountButton();
+		NewAccount newAccount = new NewAccount();
+		//***************I NEED TO CHANGE THE CUSTOMER NUMBER TO THE ONE I GOT FROM LAST CUSTOMER
+		newAccount.NewAccountDetails("67902","500");
+		
+	}
 
 }
