@@ -97,7 +97,13 @@ public class LoginTests extends Page {
 		//SM9
 		Sidebar.BalanceEnquiryButton();
 		account.BalanceEnquiry("70196");
+		//SM10
+		Sidebar.CustomisedStatementButton();
+		account.Customizedstatement("70196");
+
 		
 	}
+	
+	
 
 }

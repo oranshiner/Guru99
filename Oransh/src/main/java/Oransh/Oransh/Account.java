@@ -67,4 +67,14 @@ public class Account extends Page{
 		Page.AssertTitle("Guru99 Bank Balance Enquiry Page");
 
 	}
+
+	public void Customizedstatement(String AccountNo) {
+		PageFactory.initElements(driver, this);
+		accountNo.sendKeys(AccountNo);
+		submitDel.click();
+		//Check that A pop "Account does not exist"
+		Page.AssertPopup("Account does not exist");
+		//Check that Redirects to Balance Enquiry page
+		Page.AssertTitle("Guru99 Bank Statement Page");
+	}
 }
