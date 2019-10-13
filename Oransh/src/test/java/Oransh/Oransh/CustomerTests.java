@@ -5,8 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CustomerTests extends Page{
-	//2 Testing Accounts
 	
+//2 Testing Accounts
+
 //	Account ID	70270
 //	Customer ID	27274
 //	Customer Name	Virendra
@@ -72,6 +73,7 @@ public class CustomerTests extends Page{
 		AccountCustomer accountCustomer = new AccountCustomer();
 		accountCustomer.BalanceEnquiry("70270");
 
+		
 	}
 	@Test
 	public void Ministatement() {

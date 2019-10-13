@@ -39,4 +39,9 @@ public class Sidebar extends Page{
 	public static void CustomisedStatementButton() {
 		driver.findElement(By.xpath("/html/body/div[3]/div/ul/li[14]/a")).click();
 	}
+	
+	public static void DeleteCustomerButton() {
+		driver.findElement(By.xpath("/html/body/div[3]/div/ul/li[4]/a")).click();
+	}
+	
 }

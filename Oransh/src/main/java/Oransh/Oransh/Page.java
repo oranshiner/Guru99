@@ -17,6 +17,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class Page {
 
@@ -57,6 +58,24 @@ public class Page {
 	
 	public void refreshPage() {
 		driver.navigate().refresh();
+	}
+	
+	public String RandomEmail() {
+		  
+	    int leftLimit = 97; // letter 'a'
+	    int rightLimit = 122; // letter 'z'
+	    int targetStringLength = 15;
+	    Random random = new Random();
+	    StringBuilder buffer = new StringBuilder(targetStringLength);
+	    for (int i = 0; i < targetStringLength; i++) {
+	        int randomLimitedInt = leftLimit + (int) 
+	          (random.nextFloat() * (rightLimit - leftLimit + 1));
+	        buffer.append((char) randomLimitedInt);
+	    }
+	    String generatedString = buffer.toString();
+	    generatedString = generatedString + "@oran.com";
+	    
+	    return generatedString;
 	}
 
 }

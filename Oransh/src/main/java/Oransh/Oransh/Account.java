@@ -77,4 +77,10 @@ public class Account extends Page{
 		//Check that Redirects to Balance Enquiry page
 		Page.AssertTitle("Guru99 Bank Statement Page");
 	}
+	public void DeleteCustomer(String CustomerNo) {
+		PageFactory.initElements(driver, this);
+		customerId.sendKeys(CustomerNo);
+		submitDel.click();
+	}
+	
 }
