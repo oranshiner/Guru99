@@ -31,13 +31,13 @@ public class CustomerTests extends Page{
 		newUser.openURL();
 		newUser.login("27274", "Qaz!11");
 	}
-    @After
-    public void finish() {
-        if (driver != null)
-            driver.close();
-    }
-    
-    
+//    @After
+//    public void finish() {
+//        if (driver != null)
+//            driver.close();
+//    }
+//    
+//    
 	@Test
 	public void ChangePass() {
 		
@@ -75,6 +75,7 @@ public class CustomerTests extends Page{
 		AccountCustomer accountCustomer = new AccountCustomer();
 		SideBarCustomer.MinistatementButton();
 		accountCustomer.Ministatement("70270");
+		
 	}
 	@Test
 	public void FundTransfer() {
@@ -106,6 +107,34 @@ public class CustomerTests extends Page{
 		accountCustomer.FundTransfer("70270","70270","20","fund");
 		AssertPopup("Payers account No and Payees account No Must Not be Same!!!");
 		
+	}
+	@Test
+	public void VerifyMinistatement() {
+		//SC14
+		AccountCustomer accountCustomer = new AccountCustomer();
+		SideBarCustomer.MinistatementButton();
+		accountCustomer.Ministatement("70279");
+		AssertPopup("You are not authorize to generate statement of this Account!!");
+		//SC15
+		accountCustomer.Ministatement("3443");
+		AssertPopup("Account does not exist");
+	}
+	@Test
+	public void VerifyCustomizedStatement() {
+		//SC16
+		//Verify that customer can see Customized statement of ONLY his account
+		SideBarCustomer.CustomisedStatementButton();
+		AccountCustomer accountCustomer = new AccountCustomer();
+		accountCustomer.CustomizedStatementForm("70279", "13/10/2019", "14/10/2019", "20", "126299");
+		AssertPopup("You are not authorize to generate statement of this Account!!");
+		//SC17
+		// wrong account number entered
+		accountCustomer.CustomizedStatementForm("3443", "13/10/2019", "14/10/2019", "20", "126299");
+		AssertPopup("Account does not exist");
+		//SC18
+		//To date lower than from date Test
+		accountCustomer.CustomizedStatementForm("70270", "13/08/2019", "14/07/2019", "20", "126299");
+		AssertPopup("FromDate field should be lower than ToDate field!!");
 	}
 
 }

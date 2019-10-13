@@ -1,8 +1,10 @@
 package Oransh.Oransh;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class AccountCustomer extends Page{
 	
@@ -42,9 +44,13 @@ public class AccountCustomer extends Page{
 	
 	public void BalanceEnquiry(String AccountNo) {
 		PageFactory.initElements(driver, this);
-		Accountno.sendKeys(AccountNo);
+		WebElement DropDown = driver.findElement(By.name("accountno"));  
+		Select dropdown = new Select(DropDown);  
+		dropdown.selectByVisibleText(AccountNo); 
 		submit.click();
 	}
+	
+	
 
 	public void Ministatement(String AccountNo) {
 		PageFactory.initElements(driver, this);
@@ -69,7 +75,7 @@ public class AccountCustomer extends Page{
 		toDate.sendKeys(ToDate);
 		amountlowerlim.sendKeys(MinimumTransactionValue);
 		numOfTransaction.sendKeys(NumberOfTransaction);
-		//submit.click();
+		submit.click();
 
 	}
 }
