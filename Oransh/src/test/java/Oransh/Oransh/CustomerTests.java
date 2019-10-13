@@ -92,6 +92,20 @@ public class CustomerTests extends Page{
 		//Verify transfer details appear on the Customized statement
 		SideBarCustomer.CustomisedStatementButton();
 		accountCustomer.CustomizedStatementForm("70270", "13/10/2019", "14/10/2019", "20", "126299");
+		//SC11
+		SideBarCustomer.FundTransferButton();
+		accountCustomer.FundTransfer("70279","70270","20","fund");
+		AssertPopup("You are not authorize to Transfer Funds from this account!!");
+		AssertTitle("Fund Transfer Entry Page");
+		//SC12
+		SideBarCustomer.FundTransferButton();
+		accountCustomer.FundTransfer("70270","3443","20","fund");
+		AssertPopup("Account 3443does not exist!!!");
+		//SC13
+		SideBarCustomer.FundTransferButton();
+		accountCustomer.FundTransfer("70270","70270","20","fund");
+		AssertPopup("Payers account No and Payees account No Must Not be Same!!!");
+		
 	}
 
 }
