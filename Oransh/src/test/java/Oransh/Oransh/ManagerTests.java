@@ -1,57 +1,22 @@
 package Oransh.Oransh;
 
+import java.io.IOException;
+
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 
-import junit.framework.Assert;
-
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-@RunWith(Parameterized.class)
-public class ManagerTests extends Page {
+public class ManagerTests extends Page{
 	String randomEmail = RandomEmail();
 
-
-	@Parameterized.Parameter(0)
-	public String username; // This is the user name parameter
-	@Parameterized.Parameter(1)
-	public String password; // This is the password parameter
-	@Parameterized.Parameter(2)
-	public boolean shouldLogin;
-
-	@Parameterized.Parameters
-	public static Collection<Object[]> testExecutionParameters() {
-		return Arrays.asList(new Object[][] { { "mngr225054", "marYgaq!1", true }, // Valid User Name and password
-				// {"mngr225053", "marYga", false}//, //InValid User Name and password
-				// {"mngr225054", "marYga", false}, //Valid User Name and InValid password
-				// ****** ביטלתי שלא סתם יפתחו 4 בבדיקות שלי
-				// {"mngr225053", "marYgaq", false} //InValid User Name and Valid password
-				// ****** ביטלתי שלא סתם יפתחו 4 בבדיקות שלי
-
-		});
-	}
-
-	@Test
-	public void loginTest() throws IOException {
-		this.username = username;
-		this.password = password;
+	@Before
+    public void before() {
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
-		newUser.takeScreenshot("E:\\java\\loginPage.png");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		newUser.login(username, password);
-		HomePage.isHomePage();
-
+		newUser.login("mngr225054", "marYgaq!1");
 	}
-
+	
 	@Test // Manager
 	public void ChangePass() throws IOException {
 		// SM1
@@ -100,11 +65,16 @@ public class ManagerTests extends Page {
 		// SM6 & SM7
 		// Verify confirmation message is shown on deletion of an account
 		// Verify system behaviour after Account is deleted
-		Sidebar.DeleteAccountButton();
 		Account account = new Account();
 		// ***************I NEED TO CHANGE THE Account No TO THE ONE I GOT FROM LAST***************
 		// CUSTOMER
-		account.deleteAccount("70196");
+		Sidebar.AddNewAccountButton();
+		// Add New Temporery Account To Check Delete
+		account.NewAccountDetails("27274", "500");
+		//Get the Temporery Account number
+		String TemporeryAccount = driver.findElement(By.xpath("//*[@id=\"account\"]/tbody/tr[4]/td[2]")).getText();
+		Sidebar.DeleteAccountButton();
+		account.deleteAccount(TemporeryAccount);
 		// SM8
 		// Verify that mini statement is not generated for a deleted account
 		Sidebar.MiniStatementButton();
@@ -143,5 +113,4 @@ public class ManagerTests extends Page {
 		if (driver != null)
 			driver.close();
 	}
-
 }
