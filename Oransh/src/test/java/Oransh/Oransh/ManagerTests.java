@@ -51,12 +51,14 @@ public class ManagerTests extends Page {
 	@Test // Manager
 	public void ChangePass() throws IOException {
 		// SM1
+		//Try to change password with incorrect Old Password
 		Sidebar.changePasswordButton();
 		ChangePasswordPage changePasswordPage = new ChangePasswordPage();
 		changePasswordPage.changePassword("5555", "Mqmehm11!", "Mqmehm11!");
 		// SM2
 		changePasswordPage.changePasswordReal("marYgaq!1", "marYgaq!12", "marYgaq!12");
 		// SM3
+		//Verify you can login with NEW password after the password is changed
 		LoginPage User = new LoginPage();
 		User.login("mngr225054", "marYgaq!12");
 		Sidebar.changePasswordButton();
@@ -72,6 +74,7 @@ public class ManagerTests extends Page {
 	public void AddNewCustomerAndAccount() {
 
 		// SM4
+		//Verify after Adding New Customer, page redirects to details of added customer
 		// Open new customer window
 		Sidebar.AddNewCustomerButton();
 		NewCustomer newCustomer = new NewCustomer();
@@ -79,9 +82,10 @@ public class ManagerTests extends Page {
 		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
 				"Virendra1222@gmail.com", "Gujarat", "Qaz!11");
 		// SM5
+		//Verify a new account can be added to new customer
 		Sidebar.AddNewAccountButton();
 		Account newAccount = new Account();
-		// ***************I NEED TO CHANGE THE CUSTOMER NUMBER TO THE ONE I GOT FROM
+		// ***************I NEED TO CHANGE THE CUSTOMER NUMBER TO THE ONE I GOT FROM***************
 		// LAST CUSTOMER
 		newAccount.NewAccountDetails("27274", "500");
 
@@ -90,19 +94,24 @@ public class ManagerTests extends Page {
 
 	@Test // Manager
 	public void DeleteAccount() {
-		// SM6 //SM7
+		// SM6 & SM7
+		//Verify confirmation message is shown on deletion of an account
+		//Verify system behaviour after Account is deleted
 		Sidebar.DeleteAccountButton();
 		Account account = new Account();
-		// ***************I NEED TO CHANGE THE Account No TO THE ONE I GOT FROM LAST
+		// ***************I NEED TO CHANGE THE Account No TO THE ONE I GOT FROM LAST***************
 		// CUSTOMER
 		account.deleteAccount("70196");
 		// SM8
+		//Verify that mini statement is not generated for a deleted account
 		Sidebar.MiniStatementButton();
 		account.MiniStatement("70196");
 		// SM9
+		//Verify balance for deleted account
 		Sidebar.BalanceEnquiryButton();
 		account.BalanceEnquiry("70196");
 		// SM10
+		//Verify that customized statement is not generated for deleted account
 		Sidebar.CustomisedStatementButton();
 		account.Customizedstatement("70196");
 

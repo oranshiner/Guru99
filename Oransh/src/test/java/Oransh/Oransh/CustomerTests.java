@@ -42,12 +42,15 @@ public class CustomerTests extends Page{
 	public void ChangePass() {
 		
 		// SC1
+		//Try to change password with incorrect Old Password
 		SideBarCustomer.changePasswordButton();
 		ChangePasswordPage changePasswordPage = new ChangePasswordPage();
 		changePasswordPage.changePassword("5555", "Mqmehm11!", "Mqmehm11!");
 		// SC2
+		//Try to change password with correct Old Password
 		changePasswordPage.changePasswordReal("Qaz!11", "marYgaq!12", "marYgaq!12");
 		// SC3
+		//Verify you can log in with NEW password after the password is changed
 		LoginPage User = new LoginPage();
 		User.login("27274", "marYgaq!12");
 		SideBarCustomer.changePasswordButton();
@@ -64,6 +67,7 @@ public class CustomerTests extends Page{
 	public void BalanceEnquiry() {
 		
 		//SC4
+		//Verify Balance of an account
 		SideBarCustomer.BalanceEnquiryButton();
 		AccountCustomer accountCustomer = new AccountCustomer();
 		accountCustomer.BalanceEnquiry("70270");
@@ -72,6 +76,7 @@ public class CustomerTests extends Page{
 	@Test
 	public void Ministatement() {
 		//SC7
+		//Verify transfer details appear on the Mini statement
 		AccountCustomer accountCustomer = new AccountCustomer();
 		SideBarCustomer.MinistatementButton();
 		accountCustomer.Ministatement("70270");
@@ -80,29 +85,33 @@ public class CustomerTests extends Page{
 	@Test
 	public void FundTransfer() {
 		//SC8
+		//Verify - Fund Transfer can be done
 		AccountCustomer accountCustomer = new AccountCustomer();
 		SideBarCustomer.FundTransferButton();
 		//Transfer 1 USD
 		accountCustomer.FundTransfer("70270","70279","20","fund");
 		//SC9
-		//refrash the page
+		//Verify - Fund Transfer is not done when page is reloaded(refreshed)
 		refreshPage();
 		//Check that a refresh Redirects to Fund Transfer input Page
 		AssertTitle("Fund Transfer Entry Page");
 		//SC10
-		//Verify transfer details appear on the Customized statement
+		//Verify - transfer details appear on the Customized statement
 		SideBarCustomer.CustomisedStatementButton();
 		accountCustomer.CustomizedStatementForm("70270", "13/10/2019", "14/10/2019", "20", "126299");
 		//SC11
+		//Verify - Fund transfer for Payer Authorization 
 		SideBarCustomer.FundTransferButton();
 		accountCustomer.FundTransfer("70279","70270","20","fund");
 		AssertPopup("You are not authorize to Transfer Funds from this account!!");
 		AssertTitle("Fund Transfer Entry Page");
 		//SC12
+		//Verify - Fund transfer Payer or Payee account no does not  exist in database
 		SideBarCustomer.FundTransferButton();
 		accountCustomer.FundTransfer("70270","3443","20","fund");
 		AssertPopup("Account 3443does not exist!!!");
 		//SC13
+		//Verify - Fund transfer Payer & Payees account number are same
 		SideBarCustomer.FundTransferButton();
 		accountCustomer.FundTransfer("70270","70270","20","fund");
 		AssertPopup("Payers account No and Payees account No Must Not be Same!!!");
@@ -111,11 +120,13 @@ public class CustomerTests extends Page{
 	@Test
 	public void VerifyMinistatement() {
 		//SC14
+		//Verify a customer can see mini statement of ONLY his account
 		AccountCustomer accountCustomer = new AccountCustomer();
 		SideBarCustomer.MinistatementButton();
 		accountCustomer.Ministatement("70279");
 		AssertPopup("You are not authorize to generate statement of this Account!!");
 		//SC15
+		//Verify system behavior when wrong account number is entered in the Mini statement
 		accountCustomer.Ministatement("3443");
 		AssertPopup("Account does not exist");
 	}
