@@ -13,6 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import junit.framework.Assert;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -23,6 +25,19 @@ public class Page {
 	Page() {
 		System.setProperty("webdriver.chrome.driver", "E:\\java\\ChromeDriver.exe");
 		this.driver = driver;
+
+	}
+
+	public static void AssertTitle(String expectedTitle) {
+		String actualTitle = driver.getTitle();
+		assertEquals(expectedTitle, actualTitle);
+	}
+	
+	public static void AssertPopup(String expectedPopup) {
+		String actualpopup = driver.switchTo().alert().getText();
+		System.out.println(actualpopup); //For self Checks
+		assertEquals(expectedPopup, actualpopup);
+		driver.switchTo().alert().accept();
 
 	}
 

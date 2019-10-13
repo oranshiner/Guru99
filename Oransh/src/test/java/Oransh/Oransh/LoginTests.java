@@ -84,13 +84,19 @@ public class LoginTests extends Page {
 		
 	}
 	
-	//SM6 //SM7 
 	@Test // Manager
 	public void DeleteAccount() {
+		//SM6 //SM7 
 		Sidebar.DeleteAccountButton();
-		Account delAccount = new Account();
+		Account account = new Account();
 		//***************I NEED TO CHANGE THE Account No TO THE ONE I GOT FROM LAST CUSTOMER
-		delAccount.deleteAccount("70196");
+		account.deleteAccount("70196");
+		//SM8 
+		Sidebar.MiniStatementButton();
+		account.MiniStatement("70196");
+		//SM9
+		Sidebar.BalanceEnquiryButton();
+		account.BalanceEnquiry("70196");
 		
 	}
 

@@ -36,10 +36,11 @@ public class ChangePasswordPage extends Page {
 		this.newpassword.sendKeys(newpassword);
 		this.confirmpassword.sendKeys(confirmpassword);
 		sub.click();
-		String alertMessage = driver.switchTo().alert().getText();
-		System.out.println(alertMessage);
-		Assert.assertEquals(alertMessage, "Old Password is incorrect");
-		driver.switchTo().alert().accept();
+		//Check The pop up
+		Page.AssertPopup("Old Password is incorrect");
+		//Check that Redirects to Change Password page
+		Page.AssertTitle("Guru99 Bank New Customer Entry Page");
+		
 	}
 
 	public void changePasswordReal(String oldpassword, String newpassword, String confirmpassword) { // Test with
@@ -47,11 +48,12 @@ public class ChangePasswordPage extends Page {
 		this.oldpassword.sendKeys(oldpassword);
 		this.newpassword.sendKeys(newpassword);
 		this.confirmpassword.sendKeys(confirmpassword);
-		sub.click();	
-		String alertMessage2 = driver.switchTo().alert().getText();
-		System.out.println(alertMessage2);
-		driver.switchTo().alert().accept();
-		Assert.assertEquals(alertMessage2, "Password is Changed");
+		sub.click();
+		//Check The pop up
+		Page.AssertPopup("Password is Changed");
+		//Check that Redirects to login page
+		Page.AssertTitle("Guru99 Bank Home Page");
+ 
 	}
 
 }

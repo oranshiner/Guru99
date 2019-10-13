@@ -38,14 +38,33 @@ public class Account extends Page{
 		PageFactory.initElements(driver, this);
 		accountNo.sendKeys(AccountNo);
 		submitDel.click();
-		String alertMessage = driver.switchTo().alert().getText();
-		System.out.println(alertMessage);
-		Assert.assertEquals(alertMessage, "Do you really want to delete this Account?");
-		driver.switchTo().alert().accept();
-		String alertMessage2 = driver.switchTo().alert().getText();
-		System.out.println(alertMessage2);
-		Assert.assertEquals(alertMessage2, "Account Deleted Sucessfully");
-		driver.switchTo().alert().accept();
+		//Check that A pop "Do you really want to delete this Account?"
+		Page.AssertPopup("Do you really want to delete this Account?");
+		//Check that A pop "Account Deleted Sucessfully"
+		Page.AssertPopup("Account Deleted Sucessfully");
+		//Check that Page redirected to manager home page
+		Page.AssertTitle("Guru99 Bank Manager HomePage");
 	}
+	
+	public void MiniStatement(String AccountNo) {
+		PageFactory.initElements(driver, this);
+		accountNo.sendKeys(AccountNo);
+		submitDel.click();
+		//Check that A pop "Account does not exist"
+		Page.AssertPopup("Account does not exist");
+		//Check that Redirects to MiniStatement page
+		Page.AssertTitle("Guru99 Bank Mini Statement Page");
 
+	}
+	
+	public void BalanceEnquiry(String AccountNo) {
+		PageFactory.initElements(driver, this);
+		accountNo.sendKeys(AccountNo);
+		submitDel.click();
+		//Check that A pop "Account does not exist"
+		Page.AssertPopup("Account does not exist");
+		//Check that Redirects to Balance Enquiry page
+		Page.AssertTitle("Guru99 Bank Balance Enquiry Page");
+
+	}
 }
