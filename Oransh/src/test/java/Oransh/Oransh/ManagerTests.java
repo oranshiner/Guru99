@@ -1,5 +1,6 @@
 package Oransh.Oransh;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -13,7 +14,7 @@ import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(Parameterized.class)
-public class LoginTests extends Page {
+public class ManagerTests extends Page {
 
 	@Parameterized.Parameter(0)
 	public String username; // This is the user name parameter
@@ -64,46 +65,53 @@ public class LoginTests extends Page {
 		System.out.println("Password Changed back to original");
 		// ReEnter the Site with Original Password
 		User.login("mngr225054", "marYgaq!1");
-		
+
 	}
 
 	@Test // Manager
 	public void AddNewCustomerAndAccount() {
-		
-		//SM4
-		//Open new customer window
+
+		// SM4
+		// Open new customer window
 		Sidebar.AddNewCustomerButton();
 		NewCustomer newCustomer = new NewCustomer();
-		//Add New Customer
-		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024", "32sdVirendra@gmail.com", "Gujarat", "Qaz!11");
-		//SM5
+		// Add New Customer
+		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
+				"Virendra1222@gmail.com", "Gujarat", "Qaz!11");
+		// SM5
 		Sidebar.AddNewAccountButton();
 		Account newAccount = new Account();
-		//***************I NEED TO CHANGE THE CUSTOMER NUMBER TO THE ONE I GOT FROM LAST CUSTOMER
-		newAccount.NewAccountDetails("27274","500");
-		
+		// ***************I NEED TO CHANGE THE CUSTOMER NUMBER TO THE ONE I GOT FROM
+		// LAST CUSTOMER
+		newAccount.NewAccountDetails("27274", "500");
+
 	}
-	
+
+
 	@Test // Manager
 	public void DeleteAccount() {
-		//SM6 //SM7 
+		// SM6 //SM7
 		Sidebar.DeleteAccountButton();
 		Account account = new Account();
-		//***************I NEED TO CHANGE THE Account No TO THE ONE I GOT FROM LAST CUSTOMER
+		// ***************I NEED TO CHANGE THE Account No TO THE ONE I GOT FROM LAST
+		// CUSTOMER
 		account.deleteAccount("70196");
-		//SM8 
+		// SM8
 		Sidebar.MiniStatementButton();
 		account.MiniStatement("70196");
-		//SM9
+		// SM9
 		Sidebar.BalanceEnquiryButton();
 		account.BalanceEnquiry("70196");
-		//SM10
+		// SM10
 		Sidebar.CustomisedStatementButton();
 		account.Customizedstatement("70196");
 
-		
 	}
-	
-	
+
+	@After
+	public void finish() {
+		if (driver != null)
+			driver.close();
+	}
 
 }

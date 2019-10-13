@@ -3,14 +3,15 @@ package Oransh.Oransh;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class Sidebar extends Page{
 	public Sidebar() {
 		super();
 		
 	}
-	
-	
+
 	public static void changePasswordButton() {
 		driver.findElement(By.xpath("/html/body/div[3]/div/ul/li[11]/a")).click();
 	}

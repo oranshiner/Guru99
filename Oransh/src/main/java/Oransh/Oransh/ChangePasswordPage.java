@@ -17,6 +17,7 @@ public class ChangePasswordPage extends Page {
 		super();
 	}
 
+
 	@FindBy(name = "oldpassword")
 	WebElement oldpassword;
 

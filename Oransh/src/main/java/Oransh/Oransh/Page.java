@@ -54,5 +54,9 @@ public class Page {
 	protected void openURL(String url) {
 		driver.get(url);
 	}
+	
+	public void refreshPage() {
+		driver.navigate().refresh();
+	}
 
 }

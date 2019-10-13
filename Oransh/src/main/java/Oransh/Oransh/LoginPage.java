@@ -30,6 +30,7 @@ public class LoginPage extends Page {
 		Id.sendKeys(id);
         Pass.sendKeys(password);
         LogInButton.click();
+        
 
 	}
 
