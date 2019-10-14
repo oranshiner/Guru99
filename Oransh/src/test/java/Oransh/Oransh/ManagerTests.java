@@ -89,15 +89,15 @@ public class ManagerTests extends Page{
 		// SM8
 		// Verify that mini statement is not generated for a deleted account
 		Sidebar.MiniStatementButton();
-		account.MiniStatement("TemporeryAccount");
+		account.MiniStatement(TemporeryAccount);
 		// SM9
 		// Verify balance for deleted account
 		Sidebar.BalanceEnquiryButton();
-		account.BalanceEnquiry("TemporeryAccount");
+		account.BalanceEnquiry(TemporeryAccount);
 		// SM10
 		// Verify that customized statement is not generated for deleted account
 		Sidebar.CustomisedStatementButton();
-		account.Customizedstatement("TemporeryAccount");
+		account.Customizedstatement(TemporeryAccount);
 	}
 
 	@Test // Manager
