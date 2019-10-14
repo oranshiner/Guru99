@@ -9,12 +9,16 @@ import org.openqa.selenium.By;
 
 public class ManagerTests extends Page{
 	String randomEmail = RandomEmail();
-
+	String OriginalPass = "marYgaq!1";
+	String tempPass =  "marYgaq!12";
+	String mannagerId = "mngr225054";
+	
+	
 	@Before
     public void before() {
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
-		newUser.login("mngr225054", "marYgaq!1");
+		newUser.login(mannagerId,OriginalPass);
 	}
 	
 	@Test // Manager
@@ -25,17 +29,17 @@ public class ManagerTests extends Page{
 		ChangePasswordPage changePasswordPage = new ChangePasswordPage();
 		changePasswordPage.changePassword("5555", "Mqmehm11!", "Mqmehm11!");
 		// SM2
-		changePasswordPage.changePasswordReal("marYgaq!1", "marYgaq!12", "marYgaq!12");
+		changePasswordPage.changePasswordReal(OriginalPass,tempPass,tempPass);
 		// SM3
 		// Verify you can login with NEW password after the password is changed
 		LoginPage User = new LoginPage();
-		User.login("mngr225054", "marYgaq!12");
+		User.login(mannagerId,tempPass);
 		Sidebar.changePasswordButton();
 		// Change Back to Original Password
-		changePasswordPage.changePasswordReal("marYgaq!12", "marYgaq!1", "marYgaq!1");
+		changePasswordPage.changePasswordReal(tempPass,OriginalPass,OriginalPass);
 		System.out.println("Password Changed back to original");
 		// ReEnter the Site with Original Password
-		User.login("mngr225054", "marYgaq!1");
+		User.login(mannagerId,OriginalPass);
 
 	}
 
@@ -50,13 +54,15 @@ public class ManagerTests extends Page{
 		// Add New Customer With random email
 		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
 				randomEmail, "Gujarat", "Qaz!11");
+		//Gets the new Customer ID
+		String TempCustomerID = driver.findElement(By.xpath("//*[@id=\"customer\"]/tbody/tr[4]/td[2]")).getText();
+		System.out.println(TempCustomerID);
 		// SM5
 		// Verify a new account can be added to new customer
 		Sidebar.AddNewAccountButton();
 		Account newAccount = new Account();
-		// ***************I NEED TO CHANGE THE CUSTOMER NUMBER TO THE ONE I GOT FROM***************
-		// LAST CUSTOMER
-		newAccount.NewAccountDetails("27274", "500");
+		//New Account with the CustomerID generated in the SM4
+		newAccount.NewAccountDetails(TempCustomerID, "500");
 
 	}
 
@@ -66,8 +72,6 @@ public class ManagerTests extends Page{
 		// Verify confirmation message is shown on deletion of an account
 		// Verify system behaviour after Account is deleted
 		Account account = new Account();
-		// ***************I NEED TO CHANGE THE Account No TO THE ONE I GOT FROM LAST***************
-		// CUSTOMER
 		Sidebar.AddNewAccountButton();
 		// Add New Temporery Account To Check Delete
 		account.NewAccountDetails("27274", "500");
@@ -78,15 +82,15 @@ public class ManagerTests extends Page{
 		// SM8
 		// Verify that mini statement is not generated for a deleted account
 		Sidebar.MiniStatementButton();
-		account.MiniStatement("70196");
+		account.MiniStatement("TemporeryAccount");
 		// SM9
 		// Verify balance for deleted account
 		Sidebar.BalanceEnquiryButton();
-		account.BalanceEnquiry("70196");
+		account.BalanceEnquiry("TemporeryAccount");
 		// SM10
 		// Verify that customized statement is not generated for deleted account
 		Sidebar.CustomisedStatementButton();
-		account.Customizedstatement("70196");
+		account.Customizedstatement("TemporeryAccount");
 	}
 
 	@Test // Manager

@@ -32,13 +32,13 @@ public class CustomerTests extends Page{
 		newUser.openURL();
 		newUser.login("27274", "Qaz!11");
 	}
-//    @After
-//    public void finish() {
-//        if (driver != null)
-//            driver.close();
-//    }
-//    
-//    
+    @After
+    public void finish() {
+        if (driver != null)
+            driver.close();
+    }
+    
+    
 	@Test
 	public void ChangePass() {
 		
