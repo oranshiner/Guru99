@@ -26,6 +26,14 @@ public class Account extends Page{
 	
 	@FindBy(name = "AccSubmit")
 	WebElement submitDel;
+	
+	@FindBy(name = "ammount")
+	WebElement Ammount;
+	
+	@FindBy(name = "desc")
+	WebElement description;
+	
+	
 		
 	public void NewAccountDetails(String customerId1, String initialDeposit1) {
 		PageFactory.initElements(driver, this);
@@ -88,5 +96,13 @@ public class Account extends Page{
 		submitDel.click();
 	}
 	
-	
+	public void Deposit(String CustomerNo,String Anount,String Massage) {
+		PageFactory.initElements(driver, this);
+		accountNo.sendKeys(CustomerNo);
+		Ammount.sendKeys(Anount);
+		description.sendKeys(Massage);
+		submitDel.click();
+
+	}
+
 }

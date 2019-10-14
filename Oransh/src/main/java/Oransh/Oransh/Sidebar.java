@@ -48,4 +48,8 @@ public class Sidebar extends Page{
 		driver.findElement(By.xpath("/html/body/div[3]/div/ul/li[3]/a")).click();
 	}
 	
+	public static void DepositButton() {
+		driver.findElement(By.xpath("/html/body/div[3]/div/ul/li[8]/a")).click();
+	}
+	
 }

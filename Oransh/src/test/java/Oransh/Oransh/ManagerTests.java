@@ -1,5 +1,7 @@
 package Oransh.Oransh;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
 
 import org.junit.After;
@@ -7,27 +9,26 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-public class ManagerTests extends Page{
+public class ManagerTests extends Page {
 	String randomEmail = RandomEmail();
 	String OriginalPass = "marYgaq!1";
-	String tempPass =  "marYgaq!12";
+	String tempPass = "marYgaq!12";
 	String mannagerId = "mngr225054";
-	
-	
+
 	@Before
-    public void before() {
+	public void before() {
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
 		driver.manage().window().maximize();
-		newUser.login(mannagerId,OriginalPass);
+		newUser.login(mannagerId, OriginalPass);
 	}
-	
+
 	@After
 	public void finish() {
 		if (driver != null)
 			driver.close();
 	}
-	
+
 	@Test // Manager
 	public void ChangePass() throws IOException {
 		// SM1
@@ -36,17 +37,17 @@ public class ManagerTests extends Page{
 		ChangePasswordPage changePasswordPage = new ChangePasswordPage();
 		changePasswordPage.changePassword("5555", "Mqmehm11!", "Mqmehm11!");
 		// SM2
-		changePasswordPage.changePasswordReal(OriginalPass,tempPass,tempPass);
+		changePasswordPage.changePasswordReal(OriginalPass, tempPass, tempPass);
 		// SM3
 		// Verify you can login with NEW password after the password is changed
 		LoginPage User = new LoginPage();
-		User.login(mannagerId,tempPass);
+		User.login(mannagerId, tempPass);
 		Sidebar.changePasswordButton();
 		// Change Back to Original Password
-		changePasswordPage.changePasswordReal(tempPass,OriginalPass,OriginalPass);
+		changePasswordPage.changePasswordReal(tempPass, OriginalPass, OriginalPass);
 		System.out.println("Password Changed back to original");
 		// ReEnter the Site with Original Password
-		User.login(mannagerId,OriginalPass);
+		User.login(mannagerId, OriginalPass);
 
 	}
 
@@ -61,14 +62,14 @@ public class ManagerTests extends Page{
 		// Add New Customer With random email
 		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
 				randomEmail, "Gujarat", "Qaz!11");
-		//Gets the new Customer ID
+		// Gets the new Customer ID
 		String TempCustomerID = driver.findElement(By.xpath("//*[@id=\"customer\"]/tbody/tr[4]/td[2]")).getText();
 		System.out.println(TempCustomerID);
 		// SM5
 		// Verify a new account can be added to new customer
 		Sidebar.AddNewAccountButton();
 		Account newAccount = new Account();
-		//New Account with the CustomerID generated in the SM4
+		// New Account with the CustomerID generated in the SM4
 		newAccount.NewAccountDetails(TempCustomerID, "500");
 
 	}
@@ -82,7 +83,7 @@ public class ManagerTests extends Page{
 		Sidebar.AddNewAccountButton();
 		// Add New Temporery Account To Check Delete
 		account.NewAccountDetails("27274", "500");
-		//Get the Temporery Account number
+		// Get the Temporery Account number
 		String TemporeryAccount = driver.findElement(By.xpath("//*[@id=\"account\"]/tbody/tr[4]/td[2]")).getText();
 		Sidebar.DeleteAccountButton();
 		account.deleteAccount(TemporeryAccount);
@@ -103,43 +104,47 @@ public class ManagerTests extends Page{
 	@Test // Manager
 	public void DeleteEditCustomer() {
 		// SM11 & SM13
-		//Verify confirmation message is shown when customer is deleted
-		//Then Verify that a Customer can be Deleted
+		// Verify confirmation message is shown when customer is deleted
+		// Then Verify that a Customer can be Deleted
 		Sidebar.AddNewCustomerButton();
 		NewCustomer newCustomer = new NewCustomer();
 		// Add New Temporery Customer To Check Delete
-		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",randomEmail, "Gujarat", "Qaz!11");
-		//Get the Temporery Customer number
+		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
+				randomEmail, "Gujarat", "Qaz!11");
+		// Get the Temporery Customer number
 		String TemporeryCustomer = driver.findElement(By.xpath("//*[@id=\"customer\"]/tbody/tr[4]/td[2]")).getText();
 		Sidebar.DeleteCustomerButton();
 		Account account = new Account();
-		//Delete Temporery Customer
+		// Delete Temporery Customer
 		account.DeleteCustomer(TemporeryCustomer);
 		AssertPopup("Do you really want to delete this Customer?");
 		AssertPopup("Customer deleted Successfully");
-		// SM12 
-		//Verify that customer should not be deleted if any account exists for that customer
-		//First We Generate a new Customer and new account
+		// SM12
+		// Verify that customer should not be deleted if any account exists for that
+		// customer
+		// First We Generate a new Customer and new account
 		Sidebar.AddNewCustomerButton();
-		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",randomEmail, "Gujarat", "Qaz!11");
+		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
+				randomEmail, "Gujarat", "Qaz!11");
 		String TemporeryCustomerID = driver.findElement(By.xpath("//*[@id=\"customer\"]/tbody/tr[4]/td[2]")).getText();
 		Sidebar.AddNewAccountButton();
 		Account newAccount = new Account();
 		newAccount.NewAccountDetails(TemporeryCustomerID, "500");
-		//Now we try to delete the customer when he has an activer account.
+		// Now we try to delete the customer when he has an activer account.
 		Sidebar.DeleteCustomerButton();
 		account.DeleteCustomer(TemporeryCustomerID);
 		AssertPopup("Do you really want to delete this Customer?");
-		AssertPopup("Customer could not be deleted!!. First delete all accounts of this customer then delete the customer");
+		AssertPopup(
+				"Customer could not be deleted!!. First delete all accounts of this customer then delete the customer");
 		AssertTitle("Guru99 Bank Delete Customer Page");
 		// SM15
-		//Verify system behaviour when manager deletes a non existing customer ID
+		// Verify system behaviour when manager deletes a non existing customer ID
 		account.DeleteCustomer(TemporeryCustomer);
 		AssertPopup("Do you really want to delete this Customer?");
 		AssertPopup("Customer does not exist!!");
 		AssertTitle("Guru99 Bank Delete Customer Page");
 		// SM14
-		//Verify deleted customer cannot be edited
+		// Verify deleted customer cannot be edited
 		Sidebar.EditCustomerButton();
 		account.EditCustomer(TemporeryCustomer);
 		AssertPopup("Customer does not exist!!");
@@ -147,5 +152,27 @@ public class ManagerTests extends Page{
 
 	}
 
+	@Test // Manager
+	public void Deposit() {
+		// SM24
+		//70279 is a Testing Account.
+		String accnum = "70279";
+		String amount = "1";
+		String Type = "Deposit";
+		String desc = "Test";
+		//Verify deposit can be made to another account
+		Sidebar.DepositButton();
+		Account newAccount = new Account();
+		newAccount.Deposit(accnum,amount,desc);
+		String TransactionDetails = driver.findElement(By.xpath("//*[@id=\"deposit\"]/tbody/tr[1]/td/p")).getText();
+		assertEquals("Transaction details of Deposit for Account 70279", TransactionDetails);
+		String AccountNo = driver.findElement(By.xpath("//*[@id=\"deposit\"]/tbody/tr[7]/td[2]")).getText();
+		assertEquals(accnum, AccountNo);
+		String AmountCredited = driver.findElement(By.xpath("//*[@id=\"deposit\"]/tbody/tr[12]/td[2]")).getText();
+		assertEquals(amount, AmountCredited);
+		String TypeOfTransaction = driver.findElement(By.xpath("//*[@id=\"deposit\"]/tbody/tr[16]/td[2]")).getText();
+		assertEquals(Type, TypeOfTransaction);
+
+	}
 
 }
