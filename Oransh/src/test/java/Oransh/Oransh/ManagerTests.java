@@ -18,7 +18,14 @@ public class ManagerTests extends Page{
     public void before() {
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
+		driver.manage().window().maximize();
 		newUser.login(mannagerId,OriginalPass);
+	}
+	
+	@After
+	public void finish() {
+		if (driver != null)
+			driver.close();
 	}
 	
 	@Test // Manager
@@ -112,9 +119,4 @@ public class ManagerTests extends Page{
 		
 	}
 
-	@After
-	public void finish() {
-		if (driver != null)
-			driver.close();
-	}
 }

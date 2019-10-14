@@ -30,6 +30,7 @@ public class CustomerTests extends Page{
     public void before() {
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
+		driver.manage().window().maximize();
 		newUser.login("27274", "Qaz!11");
 	}
     @After
