@@ -102,7 +102,9 @@ public class ManagerTests extends Page{
 
 	@Test // Manager
 	public void DeleteEditCustomer() {
-		// SM11
+		// SM11 & SM13
+		//Verify confirmation message is shown when customer is deleted
+		//Then Verify that a Customer can be Deleted
 		Sidebar.AddNewCustomerButton();
 		NewCustomer newCustomer = new NewCustomer();
 		// Add New Temporery Customer To Check Delete
@@ -115,8 +117,35 @@ public class ManagerTests extends Page{
 		account.DeleteCustomer(TemporeryCustomer);
 		AssertPopup("Do you really want to delete this Customer?");
 		AssertPopup("Customer deleted Successfully");
+		// SM12 
+		//Verify that customer should not be deleted if any account exists for that customer
+		//First We Generate a new Customer and new account
+		Sidebar.AddNewCustomerButton();
+		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",randomEmail, "Gujarat", "Qaz!11");
+		String TemporeryCustomerID = driver.findElement(By.xpath("//*[@id=\"customer\"]/tbody/tr[4]/td[2]")).getText();
+		Sidebar.AddNewAccountButton();
+		Account newAccount = new Account();
+		newAccount.NewAccountDetails(TemporeryCustomerID, "500");
+		//Now we try to delete the customer when he has an activer account.
+		Sidebar.DeleteCustomerButton();
+		account.DeleteCustomer(TemporeryCustomerID);
+		AssertPopup("Do you really want to delete this Customer?");
+		AssertPopup("Customer could not be deleted!!. First delete all accounts of this customer then delete the customer");
+		AssertTitle("Guru99 Bank Delete Customer Page");
+		// SM15
+		//Verify system behaviour when manager deletes a non existing customer ID
+		account.DeleteCustomer(TemporeryCustomer);
+		AssertPopup("Do you really want to delete this Customer?");
+		AssertPopup("Customer does not exist!!");
+		AssertTitle("Guru99 Bank Delete Customer Page");
+		// SM14
+		//Verify deleted customer cannot be edited
+		Sidebar.EditCustomerButton();
+		account.EditCustomer(TemporeryCustomer);
+		AssertPopup("Customer does not exist!!");
+		AssertTitle("Guru99 Bank Edit Customer Page");
 
-		
 	}
+
 
 }

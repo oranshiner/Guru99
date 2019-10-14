@@ -82,5 +82,11 @@ public class Account extends Page{
 		customerId.sendKeys(CustomerNo);
 		submitDel.click();
 	}
+	public void EditCustomer(String CustomerNo) {
+		PageFactory.initElements(driver, this);
+		customerId.sendKeys(CustomerNo);
+		submitDel.click();
+	}
+	
 	
 }
