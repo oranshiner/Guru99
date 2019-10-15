@@ -10,8 +10,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 public class DepositTest extends Page {
-	String OriginalPass = "marYgaq!1";
-	String mannagerId = "mngr225054";
 
 	@Before
 	public void before() {

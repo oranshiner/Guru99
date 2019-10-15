@@ -6,9 +6,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 public class DeleteAccountTest extends Page {
-
-	String OriginalPass = "marYgaq!1";
-	String mannagerId = "mngr225054";
 	String TemporeryAccount;
 	
 	@Before

@@ -9,9 +9,7 @@ import org.junit.Test;
 
 
 public class ChangePasswordMannagerTest extends Page {
-	String OriginalPass = "marYgaq!1";
 	String tempPass = "marYgaq!12";
-	String mannagerId = "mngr225054";
 	
 	@Before
 	public void before() {

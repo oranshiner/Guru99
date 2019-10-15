@@ -7,8 +7,6 @@ import org.openqa.selenium.By;
 
 public class DeleteEditCustomerTest extends Page{
 	String randomEmail = RandomEmail();
-	String OriginalPass = "marYgaq!1";
-	String mannagerId = "mngr225054";
 	String TemporeryCustomer;
 	
 	@Before

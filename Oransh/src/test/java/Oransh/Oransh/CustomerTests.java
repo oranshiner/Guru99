@@ -14,8 +14,10 @@ public class CustomerTests extends Page{
 	String Amount = "20";
 	String desc = "fund";
 	String TodayDate = DodayDate();
+	String dateMinusTwoMounth = DateMinusTwoMounth();
 	String NumberOftransaction = "10";
 	String wrongAccountNumber = "3443";
+
 
 	
 	
@@ -71,7 +73,7 @@ public class CustomerTests extends Page{
 		//Verify - transfer details appear on the Customized statement
 		SideBarCustomer.CustomisedStatementButton();
 		CustomizedStatementFormPage customizedStatementFormPage = new CustomizedStatementFormPage();
-		customizedStatementFormPage.CustomizedStatementForm(AccountIDTestUser1, "08/13/2019",TodayDate,Amount,NumberOftransaction);
+		customizedStatementFormPage.CustomizedStatementForm(AccountIDTestUser1,dateMinusTwoMounth,TodayDate,Amount,NumberOftransaction);
 		//SC11
 		//Verify - Fund transfer for Payer Authorization 
 		SideBarCustomer.FundTransferButton();
@@ -109,15 +111,15 @@ public class CustomerTests extends Page{
 		//Verify that customer can see Customized statement of ONLY his account
 		SideBarCustomer.CustomisedStatementButton();
 		CustomizedStatementFormPage customizedStatementFormPage = new CustomizedStatementFormPage();
-		customizedStatementFormPage.CustomizedStatementForm(AccountIDTestUser2, "10/13/2019", TodayDate,Amount,NumberOftransaction);
+		customizedStatementFormPage.CustomizedStatementForm(AccountIDTestUser2, dateMinusTwoMounth, TodayDate,Amount,NumberOftransaction);
 		AssertPopup("You are not authorize to generate statement of this Account!!");
 		//SC17
 		// wrong account number entered
-		customizedStatementFormPage.CustomizedStatementForm(wrongAccountNumber, "10/13/2019",TodayDate,Amount,NumberOftransaction);
+		customizedStatementFormPage.CustomizedStatementForm(wrongAccountNumber,dateMinusTwoMounth,TodayDate,Amount,NumberOftransaction);
 		AssertPopup("Account does not exist");
 		//SC18
 		//To date lower than from date Test
-		customizedStatementFormPage.CustomizedStatementForm(AccountIDTestUser1, "08/13/2019", "07/14/2019",Amount,NumberOftransaction);
+		customizedStatementFormPage.CustomizedStatementForm(AccountIDTestUser1,TodayDate,dateMinusTwoMounth,Amount,NumberOftransaction);
 		AssertPopup("FromDate field should be lower than ToDate field!!");
 	}
 

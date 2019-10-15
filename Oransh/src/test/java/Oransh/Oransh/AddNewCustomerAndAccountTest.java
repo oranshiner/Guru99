@@ -7,8 +7,7 @@ import org.openqa.selenium.By;
 
 public class AddNewCustomerAndAccountTest extends Page {
 	String randomEmail = RandomEmail();
-	String OriginalPass = "marYgaq!1";
-	String mannagerId = "mngr225054";
+
 
 	@Before
 	public void before() {

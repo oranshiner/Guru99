@@ -19,13 +19,17 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
 public class Page {
 
 	protected static WebDriver driver;
-
+	String OriginalPass = "marYgaq!1";
+	String mannagerId = "mngr225054";
+	
 	Page() {
 		System.setProperty("webdriver.chrome.driver", "E:\\java\\ChromeDriver.exe");
 		this.driver = driver;
@@ -89,5 +93,16 @@ public class Page {
 	 String date1= dateFormat.format(date);
 	return date1;
 	}
+	
+	public String DateMinusTwoMounth() {
+	DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy ");
+	Calendar cal = Calendar.getInstance();
+	cal.add(Calendar.DAY_OF_MONTH, -60);
+    Date dateminus60 = cal.getTime();
+	 String date= dateFormat.format(dateminus60);
+	return date;
+
+	}
+
 
 }
