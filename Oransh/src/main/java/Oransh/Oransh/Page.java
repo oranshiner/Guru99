@@ -17,6 +17,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class Page {
@@ -76,6 +79,15 @@ public class Page {
 	    generatedString = generatedString + "@oran.com";
 	    
 	    return generatedString;
+	}
+	public String DodayDate() {
+	// Create object of SimpleDateFormat class and decide the format
+	 DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy ");
+	 //get current date time with Date()
+	 Date date = new Date();
+	 // Now format the date
+	 String date1= dateFormat.format(date);
+	return date1;
 	}
 
 }
