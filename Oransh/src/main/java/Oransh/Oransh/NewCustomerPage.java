@@ -4,9 +4,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class NewCustomer extends Page{
+public class NewCustomerPage extends Page{
 	
-	public NewCustomer() {
+	public NewCustomerPage() {
 		super();
 	}
 	

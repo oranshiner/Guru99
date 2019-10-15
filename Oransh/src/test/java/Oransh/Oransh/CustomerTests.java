@@ -71,8 +71,8 @@ public class CustomerTests extends Page{
 		//SC4
 		//Verify Balance of an account
 		SideBarCustomer.BalanceEnquiryButton();
-		AccountCustomer accountCustomer = new AccountCustomer();
-		accountCustomer.BalanceEnquiry("70270");
+		BalanceEnquiryPage balanceEnquiryPage = new BalanceEnquiryPage();
+		balanceEnquiryPage.BalanceEnquiryCustomer("70270");
 
 		
 	}
@@ -80,19 +80,20 @@ public class CustomerTests extends Page{
 	public void Ministatement() {
 		//SC7
 		//Verify transfer details appear on the Mini statement
-		AccountCustomer accountCustomer = new AccountCustomer();
+		MiniStatementPage ministatementCustomer = new MiniStatementPage();
 		SideBarCustomer.MinistatementButton();
-		accountCustomer.Ministatement("70270");
+		ministatementCustomer.MiniStatement("70270");
 		
 	}
 	@Test
 	public void FundTransfer() {
 		//SC8
 		//Verify - Fund Transfer can be done
-		AccountCustomer accountCustomer = new AccountCustomer();
+		FundTransferPage fundTransferPage = new FundTransferPage();
 		SideBarCustomer.FundTransferButton();
 		//Transfer 1 USD
-		accountCustomer.FundTransfer("70270","70279","20","fund");
+		
+		fundTransferPage.FundTransfer("70270","70279","20","fund");
 		//SC9
 		//Verify - Fund Transfer is not done when page is reloaded(refreshed)
 		refreshPage();
@@ -101,22 +102,23 @@ public class CustomerTests extends Page{
 		//SC10
 		//Verify - transfer details appear on the Customized statement
 		SideBarCustomer.CustomisedStatementButton();
-		accountCustomer.CustomizedStatementForm("70270", "13/10/2019", "14/10/2019", "20", "126299");
+		CustomizedStatementFormPage customizedStatementFormPage = new CustomizedStatementFormPage();
+		customizedStatementFormPage.CustomizedStatementForm("70270", "13/10/2019", "14/10/2019", "20", "126299");
 		//SC11
 		//Verify - Fund transfer for Payer Authorization 
 		SideBarCustomer.FundTransferButton();
-		accountCustomer.FundTransfer("70279","70270","20","fund");
+		fundTransferPage.FundTransfer("70279","70270","20","fund");
 		AssertPopup("You are not authorize to Transfer Funds from this account!!");
 		AssertTitle("Fund Transfer Entry Page");
 		//SC12
 		//Verify - Fund transfer Payer or Payee account no does not  exist in database
 		SideBarCustomer.FundTransferButton();
-		accountCustomer.FundTransfer("70270","3443","20","fund");
+		fundTransferPage.FundTransfer("70270","3443","20","fund");
 		AssertPopup("Account 3443does not exist!!!");
 		//SC13
 		//Verify - Fund transfer Payer & Payees account number are same
 		SideBarCustomer.FundTransferButton();
-		accountCustomer.FundTransfer("70270","70270","20","fund");
+		fundTransferPage.FundTransfer("70270","70270","20","fund");
 		AssertPopup("Payers account No and Payees account No Must Not be Same!!!");
 		
 	}
@@ -124,13 +126,13 @@ public class CustomerTests extends Page{
 	public void VerifyMinistatement() {
 		//SC14
 		//Verify a customer can see mini statement of ONLY his account
-		AccountCustomer accountCustomer = new AccountCustomer();
+		MiniStatementPage ministatementCustomer = new MiniStatementPage();
 		SideBarCustomer.MinistatementButton();
-		accountCustomer.Ministatement("70279");
+		ministatementCustomer.MiniStatement("70279");
 		AssertPopup("You are not authorize to generate statement of this Account!!");
 		//SC15
 		//Verify system behavior when wrong account number is entered in the Mini statement
-		accountCustomer.Ministatement("3443");
+		ministatementCustomer.MiniStatement("3443");
 		AssertPopup("Account does not exist");
 	}
 	@Test
@@ -138,16 +140,16 @@ public class CustomerTests extends Page{
 		//SC16
 		//Verify that customer can see Customized statement of ONLY his account
 		SideBarCustomer.CustomisedStatementButton();
-		AccountCustomer accountCustomer = new AccountCustomer();
-		accountCustomer.CustomizedStatementForm("70279", "13/10/2019", "14/10/2019", "20", "126299");
+		CustomizedStatementFormPage customizedStatementFormPage = new CustomizedStatementFormPage();
+		customizedStatementFormPage.CustomizedStatementForm("70279", "13/10/2019", "14/10/2019", "20", "126299");
 		AssertPopup("You are not authorize to generate statement of this Account!!");
 		//SC17
 		// wrong account number entered
-		accountCustomer.CustomizedStatementForm("3443", "13/10/2019", "14/10/2019", "20", "126299");
+		customizedStatementFormPage.CustomizedStatementForm("3443", "13/10/2019", "14/10/2019", "20", "126299");
 		AssertPopup("Account does not exist");
 		//SC18
 		//To date lower than from date Test
-		accountCustomer.CustomizedStatementForm("70270", "13/08/2019", "14/07/2019", "20", "126299");
+		customizedStatementFormPage.CustomizedStatementForm("70270", "13/08/2019", "14/07/2019", "20", "126299");
 		AssertPopup("FromDate field should be lower than ToDate field!!");
 	}
 

@@ -51,6 +51,7 @@ public class ManagerTests extends Page {
 
 	}
 
+
 	@Test // Manager
 	public void AddNewCustomerAndAccount() {
 
@@ -58,7 +59,7 @@ public class ManagerTests extends Page {
 		// Verify after Adding New Customer, page redirects to details of added customer
 		// Open new customer window
 		Sidebar.AddNewCustomerButton();
-		NewCustomer newCustomer = new NewCustomer();
+		NewCustomerPage newCustomer = new NewCustomerPage();
 		// Add New Customer With random email
 		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
 				randomEmail, "Gujarat", "Qaz!11");
@@ -68,7 +69,7 @@ public class ManagerTests extends Page {
 		// SM5
 		// Verify a new account can be added to new customer
 		Sidebar.AddNewAccountButton();
-		Account newAccount = new Account();
+		NewAccountDetailsPage newAccount = new NewAccountDetailsPage();
 		// New Account with the CustomerID generated in the SM4
 		newAccount.NewAccountDetails(TempCustomerID, "500");
 
@@ -79,26 +80,34 @@ public class ManagerTests extends Page {
 		// SM6 & SM7
 		// Verify confirmation message is shown on deletion of an account
 		// Verify system behaviour after Account is deleted
-		Account account = new Account();
+		NewAccountDetailsPage account = new NewAccountDetailsPage();
 		Sidebar.AddNewAccountButton();
 		// Add New Temporery Account To Check Delete
 		account.NewAccountDetails("27274", "500");
 		// Get the Temporery Account number
 		String TemporeryAccount = driver.findElement(By.xpath("//*[@id=\"account\"]/tbody/tr[4]/td[2]")).getText();
 		Sidebar.DeleteAccountButton();
-		account.deleteAccount(TemporeryAccount);
+		DeleteAccountPage deleteAccountPage = new DeleteAccountPage();
+		deleteAccountPage.deleteAccount(TemporeryAccount);
 		// SM8
 		// Verify that mini statement is not generated for a deleted account
 		Sidebar.MiniStatementButton();
-		account.MiniStatement(TemporeryAccount);
+		MiniStatementPage miniStatementPage = new MiniStatementPage();
+		miniStatementPage.MiniStatement(TemporeryAccount);
+		//Check that A pop "Account does not exist"
+		AssertPopup("Account does not exist");
+		//Check that Redirects to MiniStatement page
+		AssertTitle("Guru99 Bank Mini Statement Page");
 		// SM9
 		// Verify balance for deleted account
 		Sidebar.BalanceEnquiryButton();
-		account.BalanceEnquiry(TemporeryAccount);
+		BalanceEnquiryPage balanceEnquiryPage = new BalanceEnquiryPage();
+		balanceEnquiryPage.BalanceEnquiry(TemporeryAccount);
 		// SM10
 		// Verify that customized statement is not generated for deleted account
 		Sidebar.CustomisedStatementButton();
-		account.Customizedstatement(TemporeryAccount);
+		CustomizedstatementPage customizedstatementPage = new CustomizedstatementPage();
+		customizedstatementPage.Customizedstatement(TemporeryAccount);
 	}
 
 	@Test // Manager
@@ -107,16 +116,16 @@ public class ManagerTests extends Page {
 		// Verify confirmation message is shown when customer is deleted
 		// Then Verify that a Customer can be Deleted
 		Sidebar.AddNewCustomerButton();
-		NewCustomer newCustomer = new NewCustomer();
+		NewCustomerPage newCustomer = new NewCustomerPage();
 		// Add New Temporery Customer To Check Delete
 		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
 				randomEmail, "Gujarat", "Qaz!11");
 		// Get the Temporery Customer number
 		String TemporeryCustomer = driver.findElement(By.xpath("//*[@id=\"customer\"]/tbody/tr[4]/td[2]")).getText();
 		Sidebar.DeleteCustomerButton();
-		Account account = new Account();
+		DeleteCustomerPage deleteCustomerPage = new DeleteCustomerPage();
 		// Delete Temporery Customer
-		account.DeleteCustomer(TemporeryCustomer);
+		deleteCustomerPage.DeleteCustomer(TemporeryCustomer);
 		AssertPopup("Do you really want to delete this Customer?");
 		AssertPopup("Customer deleted Successfully");
 		// SM12
@@ -128,25 +137,26 @@ public class ManagerTests extends Page {
 				randomEmail, "Gujarat", "Qaz!11");
 		String TemporeryCustomerID = driver.findElement(By.xpath("//*[@id=\"customer\"]/tbody/tr[4]/td[2]")).getText();
 		Sidebar.AddNewAccountButton();
-		Account newAccount = new Account();
+		NewAccountDetailsPage newAccount = new NewAccountDetailsPage();
 		newAccount.NewAccountDetails(TemporeryCustomerID, "500");
 		// Now we try to delete the customer when he has an activer account.
 		Sidebar.DeleteCustomerButton();
-		account.DeleteCustomer(TemporeryCustomerID);
+		deleteCustomerPage.DeleteCustomer(TemporeryCustomerID);
 		AssertPopup("Do you really want to delete this Customer?");
 		AssertPopup(
 				"Customer could not be deleted!!. First delete all accounts of this customer then delete the customer");
 		AssertTitle("Guru99 Bank Delete Customer Page");
 		// SM15
 		// Verify system behaviour when manager deletes a non existing customer ID
-		account.DeleteCustomer(TemporeryCustomer);
+		deleteCustomerPage.DeleteCustomer(TemporeryCustomer);
 		AssertPopup("Do you really want to delete this Customer?");
 		AssertPopup("Customer does not exist!!");
 		AssertTitle("Guru99 Bank Delete Customer Page");
 		// SM14
 		// Verify deleted customer cannot be edited
 		Sidebar.EditCustomerButton();
-		account.EditCustomer(TemporeryCustomer);
+		EditCustomerPage editCustomerPage = new EditCustomerPage();
+		editCustomerPage.EditCustomer(TemporeryCustomer);
 		AssertPopup("Customer does not exist!!");
 		AssertTitle("Guru99 Bank Edit Customer Page");
 
@@ -155,15 +165,15 @@ public class ManagerTests extends Page {
 	@Test // Manager
 	public void Deposit() {
 		// SM24
-		//70279 is a Testing Account.
+		// 70279 is a Testing Account.
 		String accnum = "70279";
 		String amount = "1";
 		String Type = "Deposit";
 		String desc = "Test";
-		//Verify deposit can be made to another account
+		// Verify deposit can be made to another account
 		Sidebar.DepositButton();
-		Account newAccount = new Account();
-		newAccount.Deposit(accnum,amount,desc);
+		DepositPage depositPage = new DepositPage();
+		depositPage.Deposit(accnum, amount, desc);
 		String TransactionDetails = driver.findElement(By.xpath("//*[@id=\"deposit\"]/tbody/tr[1]/td/p")).getText();
 		assertEquals("Transaction details of Deposit for Account 70279", TransactionDetails);
 		String AccountNo = driver.findElement(By.xpath("//*[@id=\"deposit\"]/tbody/tr[7]/td[2]")).getText();
