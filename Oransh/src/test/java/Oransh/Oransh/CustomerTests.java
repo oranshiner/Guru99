@@ -6,30 +6,16 @@ import org.junit.Test;
 
 public class CustomerTests extends Page{
 	
-//2 Testing Accounts
-
-//	Account ID	70270
-//	Customer ID	27274
-//	Customer Name	Virendra
-//	Email	32sdVirendra@gmail.com
-//	Account Type	Savings
-//	Date of Opening	2019-10-13
-//	Current Amount	500
-//	
-//	
-//	Account ID	70279
-//	Customer ID	93712
-//	Customer Name	Virendra
-//	Email	oran@gmail.com
-//	Account Type	Savings
-//	Date of Opening	2019-10-13
-//	Current Amount	500
+	String CustomerIDTestUser1 = "27274";
+	String CustomerPasswordTestUser1 = "Qaz!11";
 	
 	String AccountIDTestUser1 = "70270";
 	String AccountIDTestUser2 = "70279";
 	String Amount = "20";
 	String desc = "fund";
 	String TodayDate = DodayDate();
+	String NumberOftransaction = "10";
+	String wrongAccountNumber = "3443";
 
 	
 	
@@ -38,7 +24,7 @@ public class CustomerTests extends Page{
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
 		driver.manage().window().maximize();
-		newUser.login("27274", "Qaz!11");
+		newUser.login(CustomerIDTestUser1,CustomerPasswordTestUser1);
 	}
     @After
     public void finish() {
@@ -85,7 +71,7 @@ public class CustomerTests extends Page{
 		//Verify - transfer details appear on the Customized statement
 		SideBarCustomer.CustomisedStatementButton();
 		CustomizedStatementFormPage customizedStatementFormPage = new CustomizedStatementFormPage();
-		customizedStatementFormPage.CustomizedStatementForm(AccountIDTestUser1, "08/13/2019",TodayDate,Amount, "126299");
+		customizedStatementFormPage.CustomizedStatementForm(AccountIDTestUser1, "08/13/2019",TodayDate,Amount,NumberOftransaction);
 		//SC11
 		//Verify - Fund transfer for Payer Authorization 
 		SideBarCustomer.FundTransferButton();
@@ -95,8 +81,8 @@ public class CustomerTests extends Page{
 		//SC12
 		//Verify - Fund transfer Payer or Payee account no does not  exist in database
 		SideBarCustomer.FundTransferButton();
-		fundTransferPage.FundTransfer(AccountIDTestUser1,"3443",Amount,desc);
-		AssertPopup("Account 3443does not exist!!!");
+		fundTransferPage.FundTransfer(AccountIDTestUser1,wrongAccountNumber,Amount,desc);
+		AssertPopup("Account "+wrongAccountNumber+"does not exist!!!");
 		//SC13
 		//Verify - Fund transfer Payer & Payees account number are same
 		SideBarCustomer.FundTransferButton();
@@ -114,7 +100,7 @@ public class CustomerTests extends Page{
 		AssertPopup("You are not authorize to generate statement of this Account!!");
 		//SC15
 		//Verify system behavior when wrong account number is entered in the Mini statement
-		ministatementCustomer.MiniStatement("3443");
+		ministatementCustomer.MiniStatement(wrongAccountNumber);
 		AssertPopup("Account does not exist");
 	}
 	@Test
@@ -123,15 +109,15 @@ public class CustomerTests extends Page{
 		//Verify that customer can see Customized statement of ONLY his account
 		SideBarCustomer.CustomisedStatementButton();
 		CustomizedStatementFormPage customizedStatementFormPage = new CustomizedStatementFormPage();
-		customizedStatementFormPage.CustomizedStatementForm(AccountIDTestUser2, "10/13/2019", TodayDate,Amount, "126299");
+		customizedStatementFormPage.CustomizedStatementForm(AccountIDTestUser2, "10/13/2019", TodayDate,Amount,NumberOftransaction);
 		AssertPopup("You are not authorize to generate statement of this Account!!");
 		//SC17
 		// wrong account number entered
-		customizedStatementFormPage.CustomizedStatementForm("3443", "10/13/2019",TodayDate,Amount, "126299");
+		customizedStatementFormPage.CustomizedStatementForm(wrongAccountNumber, "10/13/2019",TodayDate,Amount,NumberOftransaction);
 		AssertPopup("Account does not exist");
 		//SC18
 		//To date lower than from date Test
-		customizedStatementFormPage.CustomizedStatementForm(AccountIDTestUser1, "08/13/2019", "07/14/2019",Amount, "126299");
+		customizedStatementFormPage.CustomizedStatementForm(AccountIDTestUser1, "08/13/2019", "07/14/2019",Amount,NumberOftransaction);
 		AssertPopup("FromDate field should be lower than ToDate field!!");
 	}
 
