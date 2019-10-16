@@ -15,10 +15,13 @@ public class CustomizedstatementPage extends Page{
 	
 	@FindBy(name = "AccSubmit")
 	WebElement submit;
-
 	
+	@FindBy(css = "a[href='CustomisedStatementInput.php']")
+	private WebElement CustomizedstatementElem;
+
 	public void Customizedstatement(String AccountNo) {
 		PageFactory.initElements(driver, this);
+		CustomizedstatementElem.click();
 		accountNo.sendKeys(AccountNo);
 		submit.click();
 		//Check that A pop "Account does not exist"

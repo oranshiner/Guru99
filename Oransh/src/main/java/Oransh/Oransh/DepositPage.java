@@ -21,9 +21,13 @@ public class DepositPage extends Page{
 	
 	@FindBy(name = "AccSubmit")
 	WebElement submit;
+	
+	@FindBy(css = "a[href='DepositInput.php']")
+	private WebElement DepositElem;
 
 	public void Deposit(String CustomerNo,String Anount,String Massage) {
 		PageFactory.initElements(driver, this);
+		DepositElem.click();
 		accountNo.sendKeys(CustomerNo);
 		Ammount.sendKeys(Anount);
 		description.sendKeys(Massage);

@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.FindBy;
 
 public class AddNewCustomerAndAccountTest extends Page {
 	String randomEmail = RandomEmail();
@@ -14,7 +15,7 @@ public class AddNewCustomerAndAccountTest extends Page {
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
 		driver.manage().window().maximize();
-		newUser.login(mannagerId, OriginalPass);
+		newUser.login(Utills.mannagerId, Utills.mannagerPass);
 	}
 
 	@After
@@ -29,7 +30,6 @@ public class AddNewCustomerAndAccountTest extends Page {
 		// SM4
 		// Verify after Adding New Customer, page redirects to details of added customer
 		// Open new customer window
-		Sidebar.AddNewCustomerButton();
 		NewCustomerPage newCustomer = new NewCustomerPage();
 		// Add New Customer With random email
 		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
@@ -39,7 +39,6 @@ public class AddNewCustomerAndAccountTest extends Page {
 		System.out.println(TempCustomerID);
 		// SM5
 		// Verify a new account can be added to new customer
-		Sidebar.AddNewAccountButton();
 		NewAccountDetailsPage newAccount = new NewAccountDetailsPage();
 		// New Account with the CustomerID generated in the SM4
 		newAccount.NewAccountDetails(TempCustomerID, "500");

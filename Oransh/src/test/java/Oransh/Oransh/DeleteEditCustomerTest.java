@@ -14,8 +14,7 @@ public class DeleteEditCustomerTest extends Page{
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
 		driver.manage().window().maximize();
-		newUser.login(mannagerId, OriginalPass);
-		Sidebar.AddNewCustomerButton();
+		newUser.login(Utills.mannagerId, Utills.mannagerPass);
 		NewCustomerPage newCustomer = new NewCustomerPage();
 		// Add New Temporery Customer To Check Delete
 		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
@@ -36,7 +35,6 @@ public class DeleteEditCustomerTest extends Page{
 		// SM11 & SM13
 		// Verify confirmation message is shown when customer is deleted
 		// Then Verify that a Customer can be Deleted
-		Sidebar.DeleteCustomerButton();
 		DeleteCustomerPage deleteCustomerPage = new DeleteCustomerPage();
 		// Delete Temporery Customer
 		deleteCustomerPage.DeleteCustomer(TemporeryCustomer);
@@ -50,11 +48,9 @@ public class DeleteEditCustomerTest extends Page{
 		// Verify that customer should not be deleted if any account exists for that
 		// customer
 		// First We Generate a new Customer and new account
-		Sidebar.AddNewAccountButton();
 		NewAccountDetailsPage newAccount = new NewAccountDetailsPage();
 		newAccount.NewAccountDetails(TemporeryCustomer, "500");
 		// Now we try to delete the customer when he has an activer account.
-		Sidebar.DeleteCustomerButton();
 		DeleteCustomerPage deleteCustomerPage = new DeleteCustomerPage();
 		deleteCustomerPage.DeleteCustomer(TemporeryCustomer);
 		AssertPopup("Do you really want to delete this Customer?");
@@ -68,7 +64,6 @@ public class DeleteEditCustomerTest extends Page{
 		AssertTitle("Guru99 Bank Delete Customer Page");
 		// SM14
 		// Verify deleted customer cannot be edited
-		Sidebar.EditCustomerButton();
 		EditCustomerPage editCustomerPage = new EditCustomerPage();
 		editCustomerPage.EditCustomer(TemporeryCustomer);
 		AssertTitle("Guru99 Bank Edit Customer Entry Page");

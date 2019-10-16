@@ -40,10 +40,13 @@ public class NewCustomerPage extends Page{
 	@FindBy(name = "sub")
 	WebElement sub;
 
-
+	@FindBy(css = "a[href='addcustomerpage.php']")
+	private WebElement NewCustomerElem;	
+	
 	public void NewCustomerDetails(String CustomerName, String Birthdate, String Address, String City,
 		String Pin, String Mobile, String Email, String State, String password) {
 		PageFactory.initElements(driver, this);
+		NewCustomerElem.click();
 		name.sendKeys(CustomerName);
 		dob.sendKeys(Birthdate);
 		addr.sendKeys(Address);

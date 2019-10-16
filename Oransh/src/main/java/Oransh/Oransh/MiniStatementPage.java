@@ -16,9 +16,12 @@ public class MiniStatementPage extends Page{
 	@FindBy(name = "AccSubmit")
 	WebElement submit;
 	
-	
+	@FindBy(css = "a[href='MiniStatementInput.php']")
+	private WebElement MiniStatementElem;
+
 	public void MiniStatement(String AccountNo) {
 		PageFactory.initElements(driver, this);
+		MiniStatementElem.click();
 		accountNo.sendKeys(AccountNo);
 		submit.click();
 	}

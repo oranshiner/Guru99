@@ -29,10 +29,15 @@ public class ChangePasswordPage extends Page {
 
 	@FindBy(name = "sub")
 	WebElement sub;
+	
+	@FindBy(css = "a[href='PasswordInput.php']")
+	private WebElement ChangePasswordElem;
+	
 
 	public void changePassword(String oldpassword, String newpassword, String confirmpassword) {// Test with wrong
 																								// PassWord
 		PageFactory.initElements(driver, this);
+		ChangePasswordElem.click();
 		this.oldpassword.sendKeys(oldpassword);
 		this.newpassword.sendKeys(newpassword);
 		this.confirmpassword.sendKeys(confirmpassword);
@@ -46,6 +51,7 @@ public class ChangePasswordPage extends Page {
 
 	public void changePasswordReal(String oldpassword, String newpassword, String confirmpassword) { // Test with
 		PageFactory.initElements(driver, this);
+		ChangePasswordElem.click();
 		this.oldpassword.sendKeys(oldpassword);
 		this.newpassword.sendKeys(newpassword);
 		this.confirmpassword.sendKeys(confirmpassword);

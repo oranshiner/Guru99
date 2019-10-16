@@ -18,11 +18,6 @@ import java.util.concurrent.TimeUnit;
 
 @RunWith(Parameterized.class)
 public class TestGuru extends Page {
-	static String validPass = "marYgaq!1";
-	static String mannagerId = "mngr225054";
-	static String inValidPass = "marYgaq";
-	static String inValidmannagerId = "mngr2250";
-	
 	
 	@Before
     public void before() {
@@ -40,10 +35,10 @@ public class TestGuru extends Page {
 
 	@Parameterized.Parameters
 	public static Collection<Object[]> testExecutionParameters() {
-		return Arrays.asList(new Object[][] { { mannagerId,validPass, true }, // Valid User Name and password
-				 {inValidmannagerId,inValidPass, false}, //InValid User Name and password
-				 {mannagerId, inValidPass, false}, //Valid User Name and InValid password
-				 {inValidmannagerId, validPass, false} //InValid User Name and Valid password
+		return Arrays.asList(new Object[][] { { Utills.mannagerId,Utills.mannagerPass, true }, // Valid User Name and password
+				 {Utills.inValidmannagerId,Utills.inValidManagerPass, false}, //InValid User Name and password
+				 {Utills.mannagerId, Utills.inValidManagerPass, false}, //Valid User Name and InValid password
+				 {Utills.inValidmannagerId, Utills.mannagerPass, false} //InValid User Name and Valid password
 
 		});
 	}

@@ -25,9 +25,12 @@ public class FundTransferPage extends Page{
 	@FindBy(name = "desc")
 	WebElement description;
 	
+	@FindBy(css = "a[href='customerfundinput.php']")
+	private WebElement FundTransferElem;
 	
 	public void FundTransfer(String AccountNo, String ToAccountNo, String Amount, String Description) {
 		PageFactory.initElements(driver, this);
+		FundTransferElem.click();
 		accountNo.sendKeys(AccountNo);
 		toAccountNo.sendKeys(ToAccountNo);
 		amount.sendKeys(Amount);

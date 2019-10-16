@@ -15,9 +15,13 @@ public class DeleteCustomerPage extends Page{
 	
 	@FindBy(name = "AccSubmit")
 	WebElement submit;
+	
+	@FindBy(css = "a[href='DeleteCustomerInput.php']")
+	private WebElement DeleteCustomerElem;
 
 	public void DeleteCustomer(String CustomerNo) {
 		PageFactory.initElements(driver, this);
+		DeleteCustomerElem.click();
 		customerId.sendKeys(CustomerNo);
 		submit.click();
 	}

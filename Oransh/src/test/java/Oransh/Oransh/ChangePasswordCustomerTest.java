@@ -11,15 +11,14 @@ public class ChangePasswordCustomerTest extends Page{
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
 		driver.manage().window().maximize();
-		newUser.login("27274", "Qaz!11");
+		newUser.login(Utills.CustomerIDTestUser1, Utills.CustomerPasswordTestUser1);
 	}
     @After
     public void finish() {
-		SideBarCustomer.changePasswordButton();
 		ChangePasswordPage changePasswordPage = new ChangePasswordPage();
 		// Change Back to Original Password
 		System.out.println("Changing back to original");
-		changePasswordPage.changePasswordReal("marYgaq!12", "Qaz!11", "Qaz!11");
+		changePasswordPage.changePasswordReal(Utills.tempCustomerPass,Utills.CustomerPasswordTestUser1,Utills.CustomerPasswordTestUser1);
     	
         if (driver != null)
             driver.close();
@@ -31,16 +30,15 @@ public class ChangePasswordCustomerTest extends Page{
 		
 		// SC1
 		//Try to change password with incorrect Old Password
-		SideBarCustomer.changePasswordButton();
 		ChangePasswordPage changePasswordPage = new ChangePasswordPage();
 		changePasswordPage.changePassword("5555", "Mqmehm11!", "Mqmehm11!");
 		// SC2
 		//Try to change password with correct Old Password
-		changePasswordPage.changePasswordReal("Qaz!11", "marYgaq!12", "marYgaq!12");
+		changePasswordPage.changePasswordReal(Utills.CustomerPasswordTestUser1,Utills.tempCustomerPass, Utills.tempCustomerPass);
 		// SC3
 		//Verify you can log in with NEW password after the password is changed
 		LoginPage User = new LoginPage();
-		User.login("27274", "marYgaq!12");
+		User.login(Utills.CustomerIDTestUser1,Utills.tempCustomerPass);
 		
 	}
 }

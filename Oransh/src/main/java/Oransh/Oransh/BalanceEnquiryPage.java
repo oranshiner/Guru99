@@ -18,8 +18,12 @@ public class BalanceEnquiryPage extends Page{
 	@FindBy(name = "AccSubmit")
 	WebElement submit;
 	
+	@FindBy(css = "a[href='BalEnqInput.php']")
+	private WebElement BalanceEnquiryElem;
+	
 	public void BalanceEnquiry(String AccountNo) {
 		PageFactory.initElements(driver, this);
+		BalanceEnquiryElem.click();
 		accountNo.sendKeys(AccountNo);
 		submit.click();
 		//Check that A pop "Account does not exist"
@@ -31,6 +35,7 @@ public class BalanceEnquiryPage extends Page{
 	
 	public void BalanceEnquiryCustomer(String AccountNo) {
 		PageFactory.initElements(driver, this);
+		BalanceEnquiryElem.click();
 		WebElement DropDown = driver.findElement(By.name("accountno"));  
 		Select dropdown = new Select(DropDown);  
 		dropdown.selectByVisibleText(AccountNo); 

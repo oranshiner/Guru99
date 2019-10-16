@@ -28,8 +28,12 @@ public class CustomizedStatementFormPage extends Page{
 	@FindBy(name = "numtransaction")
 	WebElement numOfTransaction;
 	
+	@FindBy(css = "a[href='CustomisedStatementInput.php']")
+	private WebElement CustomizedStatementFormElem;
+	
 	public void CustomizedStatementForm(String AccountNo, String FromDate, String ToDate, String MinimumTransactionValue,String NumberOfTransaction) {
 		PageFactory.initElements(driver, this);
+		CustomizedStatementFormElem.click();
 		Accountno.sendKeys(AccountNo);
 		fromDate.sendKeys(FromDate);
 		toDate.sendKeys(ToDate);

@@ -21,9 +21,12 @@ public class NewAccountDetailsPage extends Page{
 	@FindBy(name = "button2")
 	WebElement submit;
 	
-		
+	@FindBy(css = "a[href='addAccount.php']")
+	private WebElement NewAccountElem;
+			
 	public void NewAccountDetails(String customerId1, String initialDeposit1) {
 		PageFactory.initElements(driver, this);
+		NewAccountElem.click();
 		customerId.sendKeys(customerId1);
 		initialDeposit.sendKeys(initialDeposit1);
 		submit.click();

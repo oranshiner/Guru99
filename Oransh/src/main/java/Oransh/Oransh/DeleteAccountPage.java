@@ -15,10 +15,13 @@ public class DeleteAccountPage extends Page{
 	
 	@FindBy(name = "AccSubmit")
 	WebElement submitDel;
-
 	
+	@FindBy(css = "a[href='deleteAccountInput.php']")
+	private WebElement DeleteAccountElem;
+
 	public void deleteAccount(String AccountNo) {
 		PageFactory.initElements(driver, this);
+		DeleteAccountElem.click();
 		accountNo.sendKeys(AccountNo);
 		submitDel.click();
 		//Check that A pop "Do you really want to delete this Account?"

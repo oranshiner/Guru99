@@ -27,8 +27,7 @@ import java.util.Random;
 public class Page {
 
 	protected static WebDriver driver;
-	String OriginalPass = "marYgaq!1";
-	String mannagerId = "mngr225054";
+
 	
 	Page() {
 		System.setProperty("webdriver.chrome.driver", "E:\\java\\ChromeDriver.exe");
