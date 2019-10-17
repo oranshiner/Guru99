@@ -16,7 +16,7 @@ public class DeleteAccountTest extends Page {
 		newUser.login(Utills.mannagerId, Utills.mannagerPass);
 		NewAccountDetailsPage account = new NewAccountDetailsPage();
 		// Add New Temporery Account To Check Delete
-		account.NewAccountDetails("27274", "500");
+		account.NewAccountDetails(Utills.CustomerIDTestUser1,Utills.depositAmount);
 		// Get the Temporery Account number
 	    TemporeryAccount = driver.findElement(By.xpath("//*[@id=\"account\"]/tbody/tr[4]/td[2]")).getText();
 	}

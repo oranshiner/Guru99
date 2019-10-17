@@ -18,7 +18,7 @@ public class DeleteEditCustomerTest extends Page{
 		NewCustomerPage newCustomer = new NewCustomerPage();
 		// Add New Temporery Customer To Check Delete
 		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
-				randomEmail, "Gujarat", "Qaz!11");
+				randomEmail, "Gujarat",Utills.CustomerPasswordTestUser1);
 		// Get the Temporery Customer number
 		TemporeryCustomer = driver.findElement(By.xpath("//*[@id=\"customer\"]/tbody/tr[4]/td[2]")).getText();
 	}
@@ -49,7 +49,7 @@ public class DeleteEditCustomerTest extends Page{
 		// customer
 		// First We Generate a new Customer and new account
 		NewAccountDetailsPage newAccount = new NewAccountDetailsPage();
-		newAccount.NewAccountDetails(TemporeryCustomer, "500");
+		newAccount.NewAccountDetails(TemporeryCustomer,Utills.depositAmount);
 		// Now we try to delete the customer when he has an activer account.
 		DeleteCustomerPage deleteCustomerPage = new DeleteCustomerPage();
 		deleteCustomerPage.DeleteCustomer(TemporeryCustomer);

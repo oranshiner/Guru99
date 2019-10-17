@@ -32,7 +32,7 @@ public class DepositTest extends Page {
 		DepositPage depositPage = new DepositPage();
 		depositPage.Deposit(Utills.accnum, Utills.amount, Utills.desc);
 		String TransactionDetails = driver.findElement(By.xpath("//*[@id=\"deposit\"]/tbody/tr[1]/td/p")).getText();
-		assertEquals("Transaction details of Deposit for Account 70279", TransactionDetails);
+		assertEquals("Transaction details of Deposit for Account " + Utills.accnum, TransactionDetails);
 		String AccountNo = driver.findElement(By.xpath("//*[@id=\"deposit\"]/tbody/tr[7]/td[2]")).getText();
 		assertEquals(Utills.accnum, AccountNo);
 		String AmountCredited = driver.findElement(By.xpath("//*[@id=\"deposit\"]/tbody/tr[12]/td[2]")).getText();

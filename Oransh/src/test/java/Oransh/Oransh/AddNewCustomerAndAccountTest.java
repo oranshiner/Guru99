@@ -33,15 +33,14 @@ public class AddNewCustomerAndAccountTest extends Page {
 		NewCustomerPage newCustomer = new NewCustomerPage();
 		// Add New Customer With random email
 		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
-				randomEmail, "Gujarat", "Qaz!11");
+				randomEmail, "Gujarat",Utills.CustomerPasswordTestUser1);
 		// Gets the new Customer ID
-		String TempCustomerID = driver.findElement(By.xpath("//*[@id=\"customer\"]/tbody/tr[4]/td[2]")).getText();
-		System.out.println(TempCustomerID);
+		String tempCustomerID = driver.findElement(By.xpath("//*[@id=\"customer\"]/tbody/tr[4]/td[2]")).getText();
 		// SM5
 		// Verify a new account can be added to new customer
 		NewAccountDetailsPage newAccount = new NewAccountDetailsPage();
 		// New Account with the CustomerID generated in the SM4
-		newAccount.NewAccountDetails(TempCustomerID, "500");
+		newAccount.NewAccountDetails(tempCustomerID,Utills.depositAmount);
 
 	}
 
