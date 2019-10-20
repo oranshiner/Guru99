@@ -43,9 +43,9 @@ public class ChangePasswordPage extends Page {
 		this.confirmpassword.sendKeys(confirmpassword);
 		sub.click();
 		//Check The pop up
-		Page.AssertPopup("Old Password is incorrect");
+		Page.AssertPopup(Utills.OLDPASSWORDISINCORRECT);
 		//Check that Redirects to Change Password page
-		Page.AssertTitle("Guru99 Bank New Customer Entry Page");
+		Page.AssertTitle(Utills.BankNewCustomerEntryPage);
 		
 	}
 
@@ -59,7 +59,7 @@ public class ChangePasswordPage extends Page {
 		//Check The pop up
 		Page.AssertPopup("Password is Changed");
 		//Check that Redirects to login page
-		Page.AssertTitle("Guru99 Bank Home Page");
+		Page.AssertTitle(Utills.CUSTOMERHOMEPAGETITLE);
  
 	}
 

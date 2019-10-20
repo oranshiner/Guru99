@@ -27,9 +27,9 @@ public class BalanceEnquiryPage extends Page{
 		accountNo.sendKeys(AccountNo);
 		submit.click();
 		//Check that A pop "Account does not exist"
-		Page.AssertPopup("Account does not exist");
+		Page.AssertPopup(Utills.ACCOUNTDOESNOTEXIST);
 		//Check that Redirects to Balance Enquiry page
-		Page.AssertTitle("Guru99 Bank Balance Enquiry Page");
+		Page.AssertTitle(Utills.BANKBALANCEENQUIRYPAGE);
 
 	}
 	

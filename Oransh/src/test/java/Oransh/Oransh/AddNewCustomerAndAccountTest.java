@@ -15,7 +15,7 @@ public class AddNewCustomerAndAccountTest extends Page {
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
 		driver.manage().window().maximize();
-		newUser.login(Utills.mannagerId, Utills.mannagerPass);
+		newUser.login(Utills.MANAGERID, Utills.MANAGERPASS);
 	}
 
 	@After
@@ -33,7 +33,7 @@ public class AddNewCustomerAndAccountTest extends Page {
 		NewCustomerPage newCustomer = new NewCustomerPage();
 		// Add New Customer With random email
 		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
-				randomEmail, "Gujarat",Utills.CustomerPasswordTestUser1);
+				randomEmail, "Gujarat",Utills.CUSTOMERPASSWORDUSERTESTONE);
 		// Gets the new Customer ID
 		String tempCustomerID = driver.findElement(By.xpath("//*[@id=\"customer\"]/tbody/tr[4]/td[2]")).getText();
 		// SM5

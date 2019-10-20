@@ -39,10 +39,10 @@ public class TestGuru extends Page {
 
 	@Parameterized.Parameters
 	public static Collection<Object[]> testExecutionParameters() {
-		return Arrays.asList(new Object[][] { { Utills.mannagerId,Utills.mannagerPass, true }, // Valid User Name and password
+		return Arrays.asList(new Object[][] { { Utills.MANAGERID,Utills.MANAGERPASS, true }, // Valid User Name and password
 				 {Utills.inValidmannagerId,Utills.inValidManagerPass, false}, //InValid User Name and password
-				 //{Utills.mannagerId, Utills.inValidManagerPass, false}, //Valid User Name and InValid password
-				 //{Utills.inValidmannagerId, Utills.mannagerPass, false} //InValid User Name and Valid password
+				 {Utills.MANAGERID, Utills.inValidManagerPass, false}, //Valid User Name and InValid password
+				 {Utills.inValidmannagerId, Utills.MANAGERPASS, false} //InValid User Name and Valid password
 
 		});
 	}

@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends Page {
 
-	private static final String URL = "http://www.demo.guru99.com/V4/index.php";
 	@FindBy(name = "uid")
     WebElement Id;	
 	
@@ -36,7 +35,7 @@ public class LoginPage extends Page {
 
 	public void openURL() {
 		driver = new ChromeDriver();
-		super.openURL(URL);
+		super.openURL(Utills.URL);
 	}
 	
 	

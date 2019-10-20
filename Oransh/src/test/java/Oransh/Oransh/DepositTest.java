@@ -16,7 +16,7 @@ public class DepositTest extends Page {
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
 		driver.manage().window().maximize();
-		newUser.login(Utills.mannagerId, Utills.mannagerPass);
+		newUser.login(Utills.MANAGERID, Utills.MANAGERPASS);
 	}
 
 	@After

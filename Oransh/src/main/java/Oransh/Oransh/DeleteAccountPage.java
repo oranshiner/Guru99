@@ -25,10 +25,10 @@ public class DeleteAccountPage extends Page{
 		accountNo.sendKeys(AccountNo);
 		submitDel.click();
 		//Check that A pop "Do you really want to delete this Account?"
-		Page.AssertPopup("Do you really want to delete this Account?");
+		Page.AssertPopup(Utills.DOYOUREALLYWANTTODELETETHISACCOUNT);
 		//Check that A pop "Account Deleted Sucessfully"
-		Page.AssertPopup("Account Deleted Sucessfully");
+		Page.AssertPopup(Utills.ACCOUNTDELETEDSUCESSFULLY);
 		//Check that Page redirected to manager home page
-		Page.AssertTitle("Guru99 Bank Manager HomePage");
+		Page.AssertTitle(Utills.HOMEPAGETITLE);
 	}
 }

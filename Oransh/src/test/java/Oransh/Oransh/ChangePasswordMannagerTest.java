@@ -15,15 +15,15 @@ public class ChangePasswordMannagerTest extends Page {
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
 		driver.manage().window().maximize();
-		newUser.login(Utills.mannagerId, Utills.mannagerPass);
+		newUser.login(Utills.MANAGERID, Utills.MANAGERPASS);
 	}
 
 	@After
 	public void finish() {
 		// Change Back to Original Password
 		ChangePasswordPage changePasswordPage = new ChangePasswordPage();
-		changePasswordPage.changePasswordReal(Utills.tempManagerPass, Utills.mannagerPass, Utills.mannagerPass);
-		System.out.println("Password Changed back to original");
+		changePasswordPage.changePasswordReal(Utills.MANAGERTEMPORERYPASS, Utills.MANAGERPASS, Utills.MANAGERPASS);
+		System.out.println(Utills.PASSWORDCHANGEDBACKTOORIGINAL);
 		
 		if (driver != null)
 			driver.close();
@@ -37,11 +37,11 @@ public class ChangePasswordMannagerTest extends Page {
 		ChangePasswordPage changePasswordPage = new ChangePasswordPage();
 		changePasswordPage.changePassword("5555", "Mqmehm11!", "Mqmehm11!");
 		// SM2
-		changePasswordPage.changePasswordReal(Utills.mannagerPass, Utills.tempManagerPass, Utills.tempManagerPass);
+		changePasswordPage.changePasswordReal(Utills.MANAGERPASS, Utills.MANAGERTEMPORERYPASS, Utills.MANAGERTEMPORERYPASS);
 		// SM3
 		// Verify you can login with NEW password after the password is changed
 		LoginPage User = new LoginPage();
-		User.login(Utills.mannagerId, Utills.tempManagerPass);
+		User.login(Utills.MANAGERID, Utills.MANAGERTEMPORERYPASS);
 		
 	}
 }

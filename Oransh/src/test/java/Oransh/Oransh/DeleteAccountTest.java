@@ -13,10 +13,10 @@ public class DeleteAccountTest extends Page {
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
 		driver.manage().window().maximize();
-		newUser.login(Utills.mannagerId, Utills.mannagerPass);
+		newUser.login(Utills.MANAGERID, Utills.MANAGERPASS);
 		NewAccountDetailsPage account = new NewAccountDetailsPage();
 		// Add New Temporery Account To Check Delete
-		account.NewAccountDetails(Utills.CustomerIDTestUser1,Utills.depositAmount);
+		account.NewAccountDetails(Utills.CUSTOMERIDUSERTESTONE,Utills.depositAmount);
 		// Get the Temporery Account number
 	    TemporeryAccount = driver.findElement(By.xpath("//*[@id=\"account\"]/tbody/tr[4]/td[2]")).getText();
 	}
@@ -40,9 +40,9 @@ public class DeleteAccountTest extends Page {
 		MiniStatementPage miniStatementPage = new MiniStatementPage();
 		miniStatementPage.MiniStatement(TemporeryAccount);
 		//Check that A pop "Account does not exist"
-		AssertPopup("Account does not exist");
+		AssertPopup(Utills.ACCOUNTDOESNOTEXIST);
 		//Check that Redirects to MiniStatement page
-		AssertTitle("Guru99 Bank Mini Statement Page");
+		AssertTitle(Utills.MINISTATEMENTPAGE);
 		// SM9
 		// Verify balance for deleted account
 		BalanceEnquiryPage balanceEnquiryPage = new BalanceEnquiryPage();

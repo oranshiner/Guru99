@@ -14,11 +14,11 @@ public class DeleteEditCustomerTest extends Page{
 		LoginPage newUser = new LoginPage();
 		newUser.openURL();
 		driver.manage().window().maximize();
-		newUser.login(Utills.mannagerId, Utills.mannagerPass);
+		newUser.login(Utills.MANAGERID, Utills.MANAGERPASS);
 		NewCustomerPage newCustomer = new NewCustomerPage();
 		// Add New Temporery Customer To Check Delete
 		newCustomer.NewCustomerDetails("Virendra", "04/11/2013", "Jamnagar", "Jamnagar", "567321", "8000439024",
-				randomEmail, "Gujarat",Utills.CustomerPasswordTestUser1);
+				randomEmail, "Gujarat",Utills.CUSTOMERPASSWORDUSERTESTONE);
 		// Get the Temporery Customer number
 		TemporeryCustomer = driver.findElement(By.xpath("//*[@id=\"customer\"]/tbody/tr[4]/td[2]")).getText();
 	}
@@ -38,8 +38,8 @@ public class DeleteEditCustomerTest extends Page{
 		DeleteCustomerPage deleteCustomerPage = new DeleteCustomerPage();
 		// Delete Temporery Customer
 		deleteCustomerPage.DeleteCustomer(TemporeryCustomer);
-		AssertPopup("Do you really want to delete this Customer?");
-		AssertPopup("Customer deleted Successfully");
+		AssertPopup(Utills.DOYOUREALLYWANTTODELETETHISCUSTOMER);
+		AssertPopup(Utills.CUSTOMERDELETEDSUCCESSFULLY);
 	}
 	
 	@Test // Manager
@@ -53,19 +53,19 @@ public class DeleteEditCustomerTest extends Page{
 		// Now we try to delete the customer when he has an activer account.
 		DeleteCustomerPage deleteCustomerPage = new DeleteCustomerPage();
 		deleteCustomerPage.DeleteCustomer(TemporeryCustomer);
-		AssertPopup("Do you really want to delete this Customer?");
-		AssertPopup("Customer could not be deleted!!. First delete all accounts of this customer then delete the customer");
-		AssertTitle("Guru99 Bank Delete Customer Page");
+		AssertPopup(Utills.DOYOUREALLYWANTTODELETETHISCUSTOMER);
+		AssertPopup(Utills.CUSTOMERCOULDNOTBEDELETED);
+		AssertTitle(Utills.DELETECUSTOMERPAGE);
 		// SM15
 		// Verify system behaviour when manager deletes a non existing customer ID
 		deleteCustomerPage.DeleteCustomer(TemporeryCustomer);
-		AssertPopup("Do you really want to delete this Customer?");
-		AssertPopup("Customer could not be deleted!!. First delete all accounts of this customer then delete the customer");
-		AssertTitle("Guru99 Bank Delete Customer Page");
+		AssertPopup(Utills.DOYOUREALLYWANTTODELETETHISCUSTOMER);
+		AssertPopup(Utills.CUSTOMERCOULDNOTBEDELETED);
+		AssertTitle(Utills.DELETECUSTOMERPAGE);
 		// SM14
 		// Verify deleted customer cannot be edited
 		EditCustomerPage editCustomerPage = new EditCustomerPage();
 		editCustomerPage.EditCustomer(TemporeryCustomer);
-		AssertTitle("Guru99 Bank Edit Customer Entry Page");
+		AssertTitle(Utills.EDITCUSTOMERENTRYPAGE);
 	}
 }
